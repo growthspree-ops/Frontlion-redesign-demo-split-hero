@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Frontlion Demo · Split Card</title>
+<meta name="description" content="Request a Frontlion platform demo. See how arrival, service, communication and operational data connect across every location.">
+<link rel="icon" href="assets/frontlion-logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* ============ Brand tokens (from the Frontlion logo) ============ */
+:root{
+  --orange:#C4622D;
+  --charcoal:#3C3C3C;
+  --gray:#7A7471;
+  --sand:#D4C9B8;
+
+  /* tints/shades derived only from the four brand colors */
+  --cream:color-mix(in srgb, var(--sand) 22%, #fff);
+  --cream-2:color-mix(in srgb, var(--sand) 40%, #fff);
+  --orange-soft:color-mix(in srgb, var(--orange) 12%, #fff);
+  --orange-deep:color-mix(in srgb, var(--orange) 85%, #000);
+  --ink:color-mix(in srgb, var(--charcoal) 80%, #000);
+  --line:color-mix(in srgb, var(--sand) 70%, #fff);
+
+  --sans:"Plus Jakarta Sans", system-ui, sans-serif;
+  --serif:"Instrument Serif", Georgia, serif;
+  --hand:"Caveat", cursive;
+  --r-lg:28px; --r-md:20px; --r-sm:14px;
+  --wrap:1200px;
+  --shadow:0 1px 2px rgb(60 60 60 / .05), 0 12px 32px -12px rgb(60 60 60 / .18);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--charcoal);background:var(--cream);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+.serif{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.01em}
+.accent{color:var(--orange)}
+:focus-visible{outline:2px solid var(--orange);outline-offset:3px;border-radius:8px}
+
+/* ============ Buttons & pills ============ */
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;font-weight:600;font-size:15px;border:1px solid transparent;cursor:pointer;transition:transform .2s, background .2s, color .2s, box-shadow .2s;white-space:nowrap}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:var(--orange);color:#fff;box-shadow:0 10px 24px -10px var(--orange)}
+.btn-primary:hover{background:var(--orange-deep)}
+.btn-dark{background:var(--charcoal);color:#fff}
+.btn-dark:hover{background:var(--ink)}
+.btn-ghost{border-color:var(--charcoal);color:var(--charcoal)}
+.btn-ghost:hover{background:var(--charcoal);color:#fff}
+.btn-light{background:#fff;color:var(--charcoal)}
+.btn .arr{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:rgb(255 255 255 / .2);transition:transform .2s}
+.btn-ghost .arr,.btn-light .arr{background:var(--orange);color:#fff}
+.btn:hover .arr{transform:rotate(-45deg)}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:7px 14px 7px 8px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:13px;font-weight:600;color:var(--charcoal)}
+.pill .dots{display:inline-flex}
+.pill .dots i{width:10px;height:10px;border-radius:50%;background:var(--orange)}
+.pill .dots i+i{background:var(--charcoal);margin-left:-3px}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--orange)}
+.h2{font-size:clamp(34px,4.6vw,56px);line-height:1.04;letter-spacing:-.035em;font-weight:700;color:var(--charcoal)}
+.h2 .serif{font-size:1.08em}
+.lead{font-size:17px;color:var(--gray);max-width:560px}
+
+/* ============ Announcement bar ============ */
+.announce{background:var(--charcoal);color:var(--sand);font-size:13.5px}
+.announce .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:42px;flex-wrap:wrap;padding-top:6px;padding-bottom:6px}
+.announce b{color:#fff;font-weight:600}
+.announce .new{background:var(--orange);color:#fff;padding:2px 9px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.06em;margin-right:10px}
+.announce nav{display:flex;gap:22px}
+.announce nav a:hover{color:#fff}
+
+/* ============ Header ============ */
+header.site{position:sticky;top:12px;z-index:50;margin-top:14px}
+.navbar{display:flex;align-items:center;justify-content:space-between;gap:20px;background:rgb(255 255 255 / .82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:999px;padding:10px 10px 10px 24px;box-shadow:var(--shadow)}
+.navbar .logo img{height:28px;width:auto}
+.menu{display:flex;gap:4px;list-style:none}
+.menu a{display:block;padding:9px 15px;border-radius:999px;font-size:14.5px;font-weight:500;transition:background .2s}
+.menu a:hover{background:var(--cream-2)}
+.nav-cta{display:flex;align-items:center;gap:8px}
+.nav-cta .login{font-size:14.5px;font-weight:600;padding:10px 14px}
+.nav-cta .btn{padding:11px 18px;font-size:14px}
+.burger{display:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:#fff;cursor:pointer;place-items:center}
+.burger span{display:block;width:18px;height:2px;background:var(--charcoal);position:relative}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0;width:18px;height:2px;background:var(--charcoal)}
+.burger span::before{top:-6px}.burger span::after{top:6px}
+.mobile-menu{display:none}
+
+/* ============ Hero ============ */
+.hero{padding:44px 0 40px;text-align:center;position:relative}
+.hero h1{font-size:clamp(42px,6.8vw,88px);line-height:.98;letter-spacing:-.05em;font-weight:800;margin:26px auto 22px;max-width:1000px}
+.hero h1 .serif{font-weight:400;letter-spacing:-.02em;color:var(--orange);padding-right:.05em}
+.hero p.lead{margin:0 auto;font-size:18.5px}
+.hero .ctas{display:flex;justify-content:center;gap:12px;margin-top:34px;flex-wrap:wrap}
+.hero .note{font-family:var(--hand);font-size:24px;color:var(--gray);position:absolute;display:flex;align-items:center;gap:6px}
+.hero .note svg{color:var(--orange)}
+.hero .note.n1{left:4%;top:300px;transform:rotate(-8deg)}
+.hero .note.n2{right:3%;top:210px;transform:rotate(7deg)}
+
+/* Bento visual */
+.bento{display:grid;grid-template-columns:1fr 1.7fr 1fr;grid-template-rows:auto auto;gap:18px;margin-top:100px;text-align:left;position:relative}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:22px;box-shadow:var(--shadow)}
+.b-stat{display:flex;flex-direction:column;justify-content:space-between;min-height:190px}
+.b-stat .num{font-size:58px;font-weight:800;letter-spacing:-.05em;line-height:1}
+.b-stat .num sup{font-size:.45em;color:var(--orange);vertical-align:top;margin-left:2px}
+.b-stat small{color:var(--gray);font-size:14px}
+.b-stat .ico{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:var(--orange-soft);color:var(--orange)}
+.b-main{grid-row:span 2;background:var(--charcoal);color:#fff;border:none;padding:24px;position:relative;overflow:hidden}
+.b-main::after{content:"";position:absolute;width:360px;height:360px;right:-140px;top:-160px;background:radial-gradient(circle, color-mix(in srgb,var(--orange) 55%,transparent), transparent 70%);pointer-events:none}
+.dash-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;position:relative;z-index:1}
+.dash-top .loc{font-weight:700;font-size:16px}
+.dash-top .loc small{display:block;font-weight:500;color:var(--sand);font-size:12.5px}
+.live{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;padding:6px 11px;border-radius:999px;background:rgb(255 255 255 / .08);color:var(--sand)}
+.live i{width:8px;height:8px;border-radius:50%;background:var(--orange);box-shadow:0 0 0 0 var(--orange);animation:ping 1.8s infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--orange) 70%,transparent)}80%,100%{box-shadow:0 0 0 10px transparent}}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px;position:relative;z-index:1}
+.kpi{background:rgb(255 255 255 / .06);border:1px solid rgb(255 255 255 / .08);border-radius:14px;padding:12px}
+.kpi small{color:var(--sand);font-size:11.5px;display:block}
+.kpi b{font-size:22px;letter-spacing:-.03em}
+.queue{list-style:none;display:grid;gap:8px;position:relative;z-index:1}
+.queue li{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;background:rgb(255 255 255 / .05);border-radius:14px;padding:10px 12px;font-size:13.5px}
+.queue .tk{font-weight:800;background:var(--sand);color:var(--charcoal);border-radius:9px;padding:5px 8px;font-size:12px}
+.queue li.now .tk{background:var(--orange);color:#fff}
+.queue .who small{display:block;color:var(--sand);font-size:11.5px}
+.queue .st{font-size:11.5px;font-weight:700;color:var(--sand)}
+.queue li.now .st{color:#fff}
+.bar{height:6px;border-radius:6px;background:rgb(255 255 255 / .1);overflow:hidden;margin-top:6px}
+.bar i{display:block;height:100%;background:var(--orange);border-radius:6px}
+.b-msg{display:flex;flex-direction:column;gap:10px;justify-content:center}
+.bubble{background:var(--cream);border-radius:18px 18px 18px 6px;padding:12px 14px;font-size:13.5px;max-width:240px}
+.bubble.me{align-self:flex-end;background:var(--orange);color:#fff;border-radius:18px 18px 6px 18px}
+.b-msg .meta{font-size:12px;color:var(--gray);display:flex;align-items:center;gap:8px}
+.b-msg .meta .av{width:26px;height:26px;border-radius:50%;background:var(--charcoal);color:#fff;display:grid;place-items:center;font-size:11px;font-weight:700}
+.b-map{position:relative;min-height:190px;overflow:hidden;background:var(--sand);border:none}
+.b-map svg.grid{position:absolute;inset:0;width:100%;height:100%;opacity:.5}
+.pin{position:absolute;width:14px;height:14px;border-radius:50%;background:var(--charcoal);border:3px solid #fff;box-shadow:0 4px 10px rgb(0 0 0 / .2)}
+.pin.hot{background:var(--orange);animation:ping 2s infinite}
+.b-map .tag{position:absolute;left:16px;bottom:16px;background:#fff;border-radius:999px;padding:8px 14px;font-size:13px;font-weight:700;display:flex;gap:8px;align-items:center}
+.b-map .tag i{width:8px;height:8px;border-radius:50%;background:var(--orange)}
+.b-map .label{position:absolute;left:18px;top:16px;font-weight:700;font-size:14px}
+.b-map .label small{display:block;font-weight:500;color:var(--charcoal);opacity:.7}
+.badge-spin{position:absolute;left:calc(50% - 58px);top:-58px;width:116px;height:116px;z-index:3;display:grid;place-items:center;border-radius:50%;background:var(--orange);color:#fff;box-shadow:0 14px 30px -10px var(--orange);border:6px solid var(--cream)}
+.badge-spin > svg{position:absolute;inset:0;width:100%;height:100%;animation:spin 16s linear infinite}
+.badge-spin .core{width:42px;height:42px;border-radius:50%;background:#fff;color:var(--orange);display:grid;place-items:center;transition:transform .3s}
+.badge-spin:hover .core{transform:rotate(-45deg) scale(1.08)}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ============ Marquee band ============ */
+/* Curved industry carousel */
+.arc{padding:110px 0 30px;text-align:center;position:relative}
+.arc .pill{margin-bottom:18px}
+.arc h2{font-size:clamp(34px,5vw,62px);line-height:1;letter-spacing:-.045em;font-weight:800}
+.arc h2 .serif{color:var(--orange);font-weight:400;white-space:nowrap}
+.arc .sub{color:var(--gray);font-size:17px;max-width:520px;margin:16px auto 0}
+.arc-hand{position:absolute;font-family:var(--hand);font-size:24px;color:var(--gray);display:flex;align-items:center;gap:6px}
+.arc-hand svg{color:var(--orange)}
+.arc-hand.l{left:max(24px,calc(50% - 560px));top:200px;transform:rotate(-9deg)}
+.arc-hand.r{right:max(24px,calc(50% - 560px));top:150px;transform:rotate(8deg)}
+.arc-stage{position:relative;height:470px;margin-top:20px;perspective:1600px;overflow:hidden;cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.arc-stage.drag{cursor:grabbing}
+.acard{position:absolute;left:50%;top:44%;width:240px;height:330px;margin:-165px 0 0 -120px;border-radius:26px;padding:20px;display:flex;flex-direction:column;justify-content:space-between;text-align:left;will-change:transform;box-shadow:0 24px 40px -22px rgb(60 60 60 / .45);overflow:hidden}
+.acard .top{display:flex;justify-content:space-between;align-items:center}
+.acard .ic{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:rgb(255 255 255 / .18)}
+.acard .ic svg{width:20px;height:20px}
+.acard .lab{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.75}
+.acard h3{font-size:30px;letter-spacing:-.035em;line-height:1}
+.acard h3 em{display:block;font-style:normal;font-weight:500;font-size:.62em;letter-spacing:0;opacity:.8;margin-top:6px}
+.acard .ui{border-radius:16px;padding:12px;font-size:12.5px;line-height:1.35;background:rgb(255 255 255 / .14);backdrop-filter:blur(4px)}
+.acard .ui b{display:block;font-size:13.5px}
+.acard .ui .row{display:flex;align-items:center;gap:8px}
+.acard .ui .tk{white-space:nowrap;flex:none;font-weight:800;font-size:11.5px;padding:4px 7px;border-radius:7px;background:#fff;color:var(--charcoal)}
+.acard .ui .bar{height:5px;border-radius:5px;background:rgb(255 255 255 / .2);margin-top:8px;overflow:hidden}
+.acard .ui .bar i{display:block;height:100%;background:currentColor;border-radius:5px}
+/* photo backgrounds, faded into each card's brand color */
+.acard{--tint:var(--orange)}
+.acard .ph{position:absolute;inset:0;background-size:cover;background-position:center;z-index:0;filter:saturate(.85)}
+.acard .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,color-mix(in srgb,var(--tint) 78%,transparent) 0%,color-mix(in srgb,var(--tint) 35%,transparent) 30%,color-mix(in srgb,var(--tint) 62%,transparent) 52%,var(--tint) 80%)}
+.acard > :not(.ph):not(.deco){position:relative;z-index:1}
+.acard.k-white .ph::after,.acard.k-sand .ph::after{background:linear-gradient(180deg,color-mix(in srgb,var(--tint) 82%,transparent) 0%,color-mix(in srgb,var(--tint) 45%,transparent) 26%,color-mix(in srgb,var(--tint) 80%,transparent) 46%,var(--tint) 72%)}
+.acard.k-dark{--tint:var(--charcoal)}.acard.k-sand{--tint:var(--sand)}.acard.k-gray{--tint:var(--gray)}.acard.k-white{--tint:#fff}
+.acard.k-orange{background:var(--orange);color:#fff}
+.acard.k-dark{background:var(--charcoal);color:#fff}
+.acard.k-dark .ui .tk{background:var(--orange);color:#fff}
+.acard.k-sand{background:var(--sand);color:var(--charcoal)}
+.acard.k-gray{background:var(--gray);color:#fff}
+.acard.k-white{background:#fff;color:var(--charcoal);border:1px solid var(--line)}
+.acard.k-sand .ic,.acard.k-white .ic{background:var(--orange);color:#fff}
+.acard.k-sand .ui,.acard.k-white .ui{background:var(--cream)}
+.acard.k-white .ui{background:var(--cream-2)}
+.acard.k-sand .ui .tk,.acard.k-white .ui .tk{background:var(--charcoal);color:#fff}
+.acard.k-sand .ui .bar,.acard.k-white .ui .bar{background:rgb(60 60 60 / .12)}
+.acard.k-sand .ui .bar i,.acard.k-white .ui .bar i{background:var(--orange)}
+.acard .deco{position:absolute;right:-40px;top:70px;width:150px;height:150px;border-radius:50%;border:1.5px solid currentColor;opacity:.12;pointer-events:none}
+.serve-arc{position:relative;margin-top:16px}
+.sec.serve{padding-bottom:10px}
+.serve-arc .arc-stage{height:430px}
+.serve-arc .arc-hand.l{top:-6px}
+.arc-cta{margin-top:-10px;display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap}
+.arc-cta small{color:var(--gray);font-size:14px}
+@media (max-width:860px){.arc-hand{display:none}}
+@media (max-width:600px){
+  .arc{padding-top:80px}
+  .arc-stage{height:380px}
+  .acard{width:190px;height:270px;margin:-135px 0 0 -95px;padding:16px;border-radius:22px}
+  .acard h3{font-size:21px}
+  .acard .ui{font-size:11.5px;padding:10px}
+}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+/* ============ Explore (sticky intro + focus list) ============ */
+section{position:relative}
+.sec{padding:120px 0}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;margin-bottom:52px;flex-wrap:wrap}
+.sec-head .h2{margin-top:16px;max-width:640px}
+.mini-locs{display:grid;gap:10px}
+.mini-locs div{display:grid;grid-template-columns:78px 1fr;gap:10px;align-items:center;font-size:13px;font-weight:600}
+.mini-locs i{height:8px;border-radius:8px;background:var(--cream-2);position:relative;overflow:hidden}
+.mini-locs i::after{content:"";position:absolute;inset:0;width:var(--w);background:var(--charcoal);border-radius:8px}
+.mini-locs div.hot i::after{background:var(--orange)}
+.mini-key{display:flex;gap:6px;margin-top:14px;flex-wrap:wrap}
+.mini-key span{font-size:11.5px;font-weight:600;padding:4px 10px;border-radius:999px;background:var(--cream);color:var(--gray)}
+.mini-chart{display:flex;align-items:flex-end;gap:7px;height:120px;position:relative}
+.mini-chart i{flex:1;height:var(--h);border-radius:7px 7px 3px 3px;background:rgb(60 60 60 / .14)}
+.mini-chart i.pk{background:var(--orange)}
+.mini-chart b{position:absolute;top:-6px;left:28%;font-size:11.5px;background:var(--charcoal);color:#fff;padding:5px 9px;border-radius:8px;white-space:nowrap}
+.friction{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
+.friction span{font-size:11.5px;font-weight:700;padding:4px 10px;border-radius:999px;background:rgb(255 255 255 / .55)}
+.wwn{border-radius:18px;background:var(--cream);padding:6px 14px}
+.wwn div{display:grid;grid-template-columns:62px 1fr;gap:10px;align-items:center;padding:10px 0;font-size:13.5px}
+.wwn div+div{border-top:1px dashed var(--line)}
+.wwn small{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--orange)}
+.wwn .tk{display:inline-block;font-weight:800;font-size:11.5px;padding:3px 7px;border-radius:7px;background:var(--charcoal);color:#fff;margin-right:6px}
+.sdata{display:flex;align-items:center;gap:16px}
+.sdata .fields{display:flex;flex-wrap:wrap;gap:8px;flex:1}
+.sdata .fields span{font-size:13px;font-weight:600;padding:8px 13px;border-radius:12px;background:#fff;border:1px solid var(--line)}
+.sdata .fields span:nth-child(3n+1){background:var(--charcoal);color:#fff;border-color:var(--charcoal)}
+.sdata svg{flex:none;width:150px;height:90px}
+/* sticky intro + focus list (inspired by the "Active" benefits layout) */
+.ex2{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:80px;align-items:start}
+.ex2-side{position:sticky;top:110px}
+.ex2-side .h2{margin:16px 0 20px}
+.ex2-side p{color:var(--gray);font-size:16.5px;max-width:440px}
+.ex2-side p+p{margin-top:10px}
+.mods{display:flex;flex-wrap:wrap;gap:8px;margin:30px 0 32px;max-width:460px}
+.mods span{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;padding:8px 14px;border-radius:999px;background:#fff;border:1px solid var(--line)}
+.mods span::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--orange)}
+.ex2-list{list-style:none;display:grid}
+.ex2-item{display:grid;grid-template-columns:52px minmax(0,1fr);gap:22px;padding:34px 0 34px 30px;border-left:2px solid var(--line);position:relative;cursor:pointer;transition:opacity .4s}
+.ex2-item::before{content:"";position:absolute;left:-2px;top:0;bottom:0;width:2px;background:var(--orange);transform:scaleY(0);transform-origin:top;transition:transform .5s ease}
+.ex2-item.on::before{transform:scaleY(1)}
+.ex2-list.js .ex2-item:not(.on){opacity:.42}
+.ex2-list.js .ex2-item:hover{opacity:1}
+.ex2-ic{width:52px;height:52px;border-radius:16px;background:var(--orange-soft);color:var(--orange);display:grid;place-items:center;transition:background .3s,color .3s}
+.ex2-ic svg{width:22px;height:22px}
+.ex2-item.on .ex2-ic{background:var(--orange);color:#fff}
+.ex2-item .no{font-size:12px;font-weight:800;letter-spacing:.14em;color:var(--orange)}
+.ex2-item h3{font-size:clamp(20px,2vw,25px);letter-spacing:-.03em;line-height:1.2;margin:6px 0 8px}
+.ex2-item p{color:var(--gray);font-size:15.5px;max-width:470px}
+.ex2-viz{display:grid;grid-template-rows:0fr;transition:grid-template-rows .55s ease}
+.ex2-viz > div{overflow:hidden}
+.ex2-list:not(.js) .ex2-viz,.ex2-item.on .ex2-viz{grid-template-rows:1fr}
+.ex2-card{margin-top:20px;background:#fff;border:1px solid var(--line);border-radius:22px;padding:20px;box-shadow:0 20px 40px -30px rgb(60 60 60 / .4)}
+.flow2{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.flow2 span{font-size:13px;font-weight:600;padding:8px 14px;border-radius:999px;background:var(--cream);border:1px solid var(--line)}
+.flow2 svg{color:var(--orange);flex:none}
+.flow2 b{font-size:13.5px;padding:9px 16px;border-radius:999px;background:var(--charcoal);color:#fff}
+.ex2-card .friction span{background:var(--cream)}
+.ex2-card .mini-chart i{background:var(--cream-2)}
+.ex2-card .mini-chart i.pk{background:var(--orange)}
+@media (max-width:960px){
+  .ex2{grid-template-columns:1fr;gap:40px}
+  .ex2-side{position:static}
+  .ex2-list.js .ex2-item:not(.on){opacity:1}
+  .ex2-list.js .ex2-viz{grid-template-rows:1fr}
+  .ex2-item::before{transform:scaleY(1);opacity:.35}
+  .ex2-item.on::before{opacity:1}
+}
+@media (max-width:600px){
+  .ex2-item{grid-template-columns:1fr;gap:14px;padding:26px 0 26px 20px}
+  .ex2-ic{width:44px;height:44px;border-radius:14px}
+  .sdata{flex-direction:column;align-items:stretch}
+  .sdata svg{width:100%}
+}
+/* ============ Who we serve ============ */
+.serve{background:#fff;border-radius:48px 48px 0 0}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:70px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stat{padding:24px 22px;border-right:1px solid var(--line)}
+.stat:last-child{border-right:none}
+.stat b{display:block;white-space:nowrap;font-size:clamp(20px,1.9vw,27px);letter-spacing:-.03em;line-height:1.1;font-weight:800;margin-bottom:6px}
+.stat b .serif{color:var(--orange);font-weight:400}
+.stat small{display:block;color:var(--gray);font-size:13.5px;line-height:1.45}
+.ind-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.ind{border-radius:var(--r-md);padding:26px;min-height:250px;display:flex;flex-direction:column;justify-content:space-between;transition:transform .3s, box-shadow .3s;position:relative;overflow:hidden}
+.ind:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.ind .lab{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.7}
+.ind h3{font-size:26px;letter-spacing:-.03em;line-height:1.1;margin:6px 0 10px}
+.ind p{font-size:14.5px;opacity:.85;max-width:300px}
+.ind .foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid currentColor;border-color:rgb(0 0 0 / .1);padding-top:16px;margin-top:22px;font-size:13px;font-weight:600}
+.ind .go{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:var(--charcoal);color:#fff;transition:transform .3s}
+.ind:hover .go{transform:rotate(-45deg)}
+.ind.c-orange{background:var(--orange);color:#fff}
+.ind.c-orange .foot{border-color:rgb(255 255 255 / .25)}
+.ind.c-orange .go{background:#fff;color:var(--orange)}
+.ind.c-dark{background:var(--charcoal);color:#fff}
+.ind.c-dark .foot{border-color:rgb(255 255 255 / .15)}
+.ind.c-dark .go{background:var(--orange)}
+.ind.c-sand{background:var(--sand)}
+.ind.c-cream{background:var(--cream-2)}
+.ind.c-gray{background:var(--gray);color:#fff}
+.ind.c-gray .foot{border-color:rgb(255 255 255 / .2)}
+.ind.c-gray .go{background:#fff;color:var(--charcoal)}
+.ind.c-line{background:#fff;border:1px solid var(--line)}
+
+/* ============ Logos ============ */
+.logos{background:#fff;padding:20px 0 120px;border-radius:0 0 48px 48px}
+.logos .cap{text-align:center;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--gray);font-weight:600;margin-bottom:34px}
+.logo-row{overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.logo-row+.logo-row{margin-top:18px}
+.logo-track{display:flex;gap:18px;width:max-content;animation:marquee 50s linear infinite}
+.logo-row.rev .logo-track{animation-direction:reverse}
+.logo-row:hover .logo-track{animation-play-state:paused}
+.lg{width:180px;height:92px;border-radius:var(--r-sm);background:var(--cream);display:grid;place-items:center;padding:18px 26px;flex:none}
+.lg img{max-height:54px;width:auto;object-fit:contain;filter:grayscale(1);opacity:.75;transition:filter .3s, opacity .3s}
+.lg:hover img{filter:none;opacity:1}
+
+/* ============ Book section (demo ticket) ============ */
+.book{padding:110px 0}
+.ticket{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr);filter:drop-shadow(0 34px 44px rgb(60 60 60 / .2))}
+.stub,.tform{--n:20px;position:relative}
+.stub{background:var(--orange);color:#fff;border-radius:36px 0 0 36px;padding:42px 40px 36px;display:flex;flex-direction:column;gap:26px;overflow:hidden;
+  -webkit-mask:radial-gradient(circle var(--n) at 100% 0,#0000 98%,#000) top/100% 51% no-repeat,radial-gradient(circle var(--n) at 100% 100%,#0000 98%,#000) bottom/100% 51% no-repeat;
+  mask:radial-gradient(circle var(--n) at 100% 0,#0000 98%,#000) top/100% 51% no-repeat,radial-gradient(circle var(--n) at 100% 100%,#0000 98%,#000) bottom/100% 51% no-repeat}
+.stub::before,.stub::after{content:"";position:absolute;border-radius:50%;border:1.5px solid rgb(255 255 255 / .16);pointer-events:none}
+.stub::before{width:460px;height:460px;left:-210px;bottom:-250px}
+.stub::after{width:300px;height:300px;left:-130px;bottom:-170px}
+.stub-top{display:flex;justify-content:space-between;align-items:center;font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:color-mix(in srgb,var(--sand) 55%,#fff)}
+.stub-top span:last-child{background:#fff;color:var(--orange);padding:5px 11px;border-radius:999px;letter-spacing:.08em}
+.stub .eyebrow{color:#fff}
+.stub h2{font-size:clamp(38px,4.4vw,58px);line-height:1;letter-spacing:-.045em;font-weight:800;margin:14px 0 16px}
+.stub h2 .serif{color:var(--charcoal);font-weight:400}
+.stub .intro{font-size:16.5px;color:color-mix(in srgb,var(--sand) 45%,#fff);max-width:400px}
+.facts3{list-style:none;display:grid;gap:16px;position:relative;z-index:1}
+.facts3 li{display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:start}
+.facts3 .ic{width:40px;height:40px;border-radius:13px;background:rgb(255 255 255 / .16);display:grid;place-items:center}
+.facts3 .ic svg{width:19px;height:19px}
+.facts3 b{display:block;font-size:16px;margin-bottom:2px}
+.facts3 p{font-size:13.5px;line-height:1.5;color:color-mix(in srgb,var(--sand) 40%,#fff)}
+.stub-foot{margin-top:auto;display:flex;align-items:flex-end;justify-content:space-between;gap:16px;position:relative;z-index:1}
+.barcode{height:44px;width:170px;background:repeating-linear-gradient(90deg,#fff 0 2px,transparent 2px 5px,#fff 5px 6px,transparent 6px 8px,#fff 8px 11px,transparent 11px 13px);opacity:.85;border-radius:2px}
+.stub-foot small{font-size:11px;font-weight:700;letter-spacing:.16em;color:color-mix(in srgb,var(--sand) 55%,#fff);text-align:right;line-height:1.6}
+.tform{background:#fff;border-radius:0 36px 36px 0;padding:46px 50px 42px;
+  -webkit-mask:radial-gradient(circle var(--n) at 0 0,#0000 98%,#000) top/100% 51% no-repeat,radial-gradient(circle var(--n) at 0 100%,#0000 98%,#000) bottom/100% 51% no-repeat;
+  mask:radial-gradient(circle var(--n) at 0 0,#0000 98%,#000) top/100% 51% no-repeat,radial-gradient(circle var(--n) at 0 100%,#0000 98%,#000) bottom/100% 51% no-repeat}
+.tform::before{content:"";position:absolute;left:0;top:calc(var(--n) + 10px);bottom:calc(var(--n) + 10px);border-left:2px dashed var(--sand)}
+.tform-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:12px}
+.tform-head b{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--charcoal)}
+.tform-head small{font-size:12.5px;color:var(--gray)}
+.tform-head small i{font-style:normal;color:var(--orange)}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px 30px}
+.field{position:relative;padding-top:4px}
+.field.full{grid-column:1/-1}
+.field input,.field select,.field textarea{width:100%;border:0;border-bottom:1.5px solid var(--line);border-radius:0;background:linear-gradient(var(--orange),var(--orange)) left bottom/0 2px no-repeat;padding:26px 0 10px;font-size:16px;outline:none;transition:background-size .35s ease,border-color .2s;-webkit-appearance:none;appearance:none}
+.field input:focus,.field select:focus,.field textarea:focus{background-size:100% 2px}
+.field input:focus-visible,.field select:focus-visible,.field textarea:focus-visible{outline:none}
+.field textarea{resize:vertical;min-height:96px;line-height:1.5}
+.field select{cursor:pointer;background:linear-gradient(var(--orange),var(--orange)) left bottom/0 2px no-repeat,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23C4622D' stroke-width='2.6' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") right 2px center/14px no-repeat;padding-right:24px}
+.field select:focus{background-size:100% 2px,14px}
+.field select:invalid{color:var(--gray)}
+.field label{position:absolute;left:0;top:30px;font-size:16px;font-weight:500;color:var(--gray);pointer-events:none;transition:top .2s,font-size .2s,color .2s,letter-spacing .2s}
+.field .req{color:var(--orange);margin-left:2px}
+.field input::placeholder,.field textarea::placeholder{color:transparent;transition:color .2s}
+.field input:focus::placeholder{color:var(--sand)}
+.field input:focus~label,.field input:not(:placeholder-shown)~label,.field textarea:focus~label,.field textarea:not(:placeholder-shown)~label,.field.sel label{top:6px;font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.field input:focus~label,.field textarea:focus~label,.field select:focus~label{color:var(--orange)}
+.field.err input,.field.err select{border-bottom-color:var(--orange)}
+.field .msg{font-size:12px;color:var(--orange);display:none;margin-top:6px}
+.field.err .msg{display:block}
+.tform .btn{width:auto;justify-content:flex-start;margin-top:30px;padding:15px 22px 15px 28px;font-size:16px}
+.success{display:none;text-align:center;padding:70px 10px}
+.success .ok{width:110px;height:110px;margin:0 auto 22px;border-radius:50%;border:3px solid var(--orange);color:var(--orange);display:grid;place-items:center;transform:rotate(-8deg);font-size:13px;font-weight:800;letter-spacing:.14em;position:relative}
+.success .ok::before{content:"";position:absolute;inset:6px;border-radius:50%;border:1.5px dashed var(--orange)}
+.success h3{font-size:26px;letter-spacing:-.03em;margin-bottom:8px}
+.success p{color:var(--gray);max-width:380px;margin:0 auto}
+.tform.done form{display:none}
+.tform.done .success{display:block}
+@media (max-width:960px){
+  .ticket{grid-template-columns:1fr}
+  .stub{border-radius:32px 32px 0 0;
+    -webkit-mask:radial-gradient(circle var(--n) at 0 100%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle var(--n) at 100% 100%,#0000 98%,#000) right/51% 100% no-repeat;
+    mask:radial-gradient(circle var(--n) at 0 100%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle var(--n) at 100% 100%,#0000 98%,#000) right/51% 100% no-repeat}
+  .tform{border-radius:0 0 32px 32px;
+    -webkit-mask:radial-gradient(circle var(--n) at 0 0,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle var(--n) at 100% 0,#0000 98%,#000) right/51% 100% no-repeat;
+    mask:radial-gradient(circle var(--n) at 0 0,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle var(--n) at 100% 0,#0000 98%,#000) right/51% 100% no-repeat}
+  .tform::before{top:0;bottom:auto;left:calc(var(--n) + 10px);right:calc(var(--n) + 10px);border-left:0;border-top:2px dashed var(--sand)}
+}
+@media (max-width:600px){
+  .book{padding:80px 0}
+  .stub{padding:32px 24px 28px}
+  .tform{padding:36px 24px 30px}
+  .fgrid{grid-template-columns:1fr}
+  .barcode{width:120px}
+}
+/* ============ FAQ ============ */
+.faq .grid{display:grid;grid-template-columns:.9fr 1.3fr;gap:70px}
+.faq .h2{margin:16px 0 18px}
+.faq .side .card{margin-top:30px;display:flex;gap:16px;align-items:center}
+.faq .side .card .ico{flex:none;width:50px;height:50px;border-radius:16px;background:var(--orange);color:#fff;display:grid;place-items:center}
+.faq .side .card b{display:block}
+.faq .side .card a{color:var(--orange);font-weight:600;font-size:14.5px}
+.qa{border-bottom:1px solid var(--line)}
+.qa:first-child{border-top:1px solid var(--line)}
+.qa summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:26px 0;font-size:20px;font-weight:600;letter-spacing:-.02em}
+.qa summary::-webkit-details-marker{display:none}
+.qa .tog{flex:none;width:42px;height:42px;border-radius:50%;border:1.5px solid var(--charcoal);display:grid;place-items:center;transition:all .3s}
+.qa[open] .tog{background:var(--orange);border-color:var(--orange);color:#fff;transform:rotate(45deg)}
+.qa .ans{color:var(--gray);font-size:16px;padding:0 60px 26px 0;max-width:640px}
+
+/* ============ Final CTA (framed banner with 3D objects) ============ */
+.final{padding:30px 0 120px}
+.fr{background:#fff;border:1px solid var(--line);border-radius:44px;padding:12px;box-shadow:0 50px 90px -50px rgb(60 60 60 / .45)}
+.bn{position:relative;overflow:hidden;border-radius:34px;min-height:460px;display:grid;place-items:center;text-align:center;color:#fff;padding:84px 24px;
+  background:radial-gradient(70% 80% at 18% 0%,color-mix(in srgb,var(--sand) 75%,#fff),transparent 60%),radial-gradient(60% 70% at 100% 100%,var(--orange-deep),transparent 70%),linear-gradient(135deg,color-mix(in srgb,var(--orange) 80%,var(--sand)),var(--orange) 55%,var(--orange-deep))}
+.bn::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgb(255 255 255 / .2) 1px,transparent 1px);background-size:20px 20px;-webkit-mask-image:radial-gradient(60% 70% at 50% 40%,#000,transparent);mask-image:radial-gradient(60% 70% at 50% 40%,#000,transparent);pointer-events:none}
+.bn-in{position:relative;z-index:3;max-width:640px}
+.bn-tag{display:inline-flex;align-items:center;gap:8px;padding:6px 14px 6px 6px;border-radius:999px;background:rgb(255 255 255 / .16);border:1px solid rgb(255 255 255 / .3);font-size:13px;font-weight:600;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.bn-tag b{width:22px;height:22px;border-radius:50%;background:#fff;color:var(--orange);display:grid;place-items:center}
+.bn h2{font-size:clamp(40px,6vw,78px);line-height:1;letter-spacing:-.05em;font-weight:800;margin:22px 0 18px;text-shadow:0 2px 30px rgb(60 60 60 / .15)}
+.bn h2 .serif{font-weight:400;letter-spacing:-.02em}
+.bn p{font-size:17px;line-height:1.55;color:color-mix(in srgb,var(--sand) 35%,#fff);max-width:520px;margin:0 auto}
+.bn-btns{display:flex;justify-content:center;gap:12px;margin-top:32px;flex-wrap:wrap}
+.bn-ghost{border-color:rgb(255 255 255 / .7);color:#fff}
+.bn-ghost .arr{background:#fff;color:var(--orange)}
+.bn-ghost:hover{background:#fff;color:var(--orange)}
+.bn-ghost:hover .arr{background:var(--orange);color:#fff}
+.bn-proof{display:inline-flex;align-items:center;gap:12px;margin-top:26px;font-size:13.5px;color:color-mix(in srgb,var(--sand) 35%,#fff)}
+.bn-proof .avs{display:flex}
+.bn-proof .avs i{width:30px;height:30px;border-radius:50%;border:2.5px solid color-mix(in srgb,var(--orange) 85%,#fff)}
+.bn-proof .avs i+i{margin-left:-9px}
+.bn-proof .avs i:nth-child(1){background:var(--charcoal)}.bn-proof .avs i:nth-child(2){background:var(--sand)}.bn-proof .avs i:nth-child(3){background:#fff}.bn-proof .avs i:nth-child(4){background:var(--gray)}
+.bn-proof b{color:#fff}
+/* 3D glass objects */
+.obj{position:absolute;z-index:2;pointer-events:none}
+.o-bub{left:-46px;bottom:-70px;width:330px;height:240px;border-radius:70px 70px 70px 22px;transform:rotate(-14deg);
+  background:linear-gradient(160deg,#fff 10%,color-mix(in srgb,var(--sand) 35%,#fff) 70%,color-mix(in srgb,var(--sand) 70%,#fff));
+  box-shadow:inset 0 3px 0 #fff,inset -14px -20px 40px rgb(196 98 45 / .18),0 40px 60px -30px rgb(60 60 60 / .55)}
+.o-bub::before,.o-bub::after{content:"";position:absolute;left:54px;height:16px;border-radius:16px;background:color-mix(in srgb,var(--sand) 80%,#fff)}
+.o-bub::before{top:70px;width:58%}
+.o-bub::after{top:104px;width:38%;background:var(--orange);opacity:.85}
+.o-bub i{position:absolute;left:54px;top:146px;display:flex;gap:9px}
+.o-bub i b{width:14px;height:14px;border-radius:50%;background:var(--charcoal)}
+.o-bub i b:nth-child(2){opacity:.55}.o-bub i b:nth-child(3){opacity:.25}
+.o-tk{right:-30px;bottom:-56px;width:300px;height:200px;border-radius:30px;transform:rotate(13deg);--n:22px;
+  background:linear-gradient(200deg,#fff 15%,color-mix(in srgb,var(--sand) 40%,#fff) 80%);
+  box-shadow:inset 0 3px 0 #fff,0 40px 60px -30px rgb(60 60 60 / .55);
+  -webkit-mask:radial-gradient(circle var(--n) at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle var(--n) at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat;
+  mask:radial-gradient(circle var(--n) at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle var(--n) at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat}
+.o-tk::before{content:"";position:absolute;left:34px;right:34px;top:50%;border-top:2.5px dashed color-mix(in srgb,var(--sand) 90%,var(--gray))}
+.o-tk span{position:absolute;left:38px;top:30px;font-weight:800;font-size:40px;letter-spacing:-.04em;color:var(--charcoal)}
+.o-tk small{position:absolute;left:40px;top:80px;font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--orange)}
+.o-tk em{position:absolute;left:38px;bottom:34px;width:130px;height:30px;background:repeating-linear-gradient(90deg,var(--charcoal) 0 2px,transparent 2px 5px,var(--charcoal) 5px 6px,transparent 6px 9px);opacity:.75}
+/* floating icon badges */
+.ib{position:absolute;z-index:1;width:64px;height:64px;border-radius:50%;background:rgb(255 255 255 / .92);display:grid;place-items:center;color:var(--orange);box-shadow:0 18px 30px -14px rgb(60 60 60 / .5),inset 0 0 0 6px rgb(255 255 255 / .5);animation:bob 7s ease-in-out infinite}
+.ib svg{width:26px;height:26px}
+.ib.i1{left:9%;top:16%;animation-delay:-1s}
+.ib.i2{left:21%;top:40%;width:48px;height:48px;animation-delay:-3s}.ib.i2 svg{width:20px;height:20px}
+.ib.i3{right:10%;top:14%;animation-delay:-2s}
+.ib.i4{right:22%;top:36%;width:48px;height:48px;animation-delay:-4s}.ib.i4 svg{width:20px;height:20px}
+@keyframes bob{0%,100%{translate:0 0}50%{translate:0 -10px}}
+@media (max-width:1000px){.ib.i2,.ib.i4{display:none}.o-bub{width:260px;height:190px;left:-80px}.o-tk{width:240px;height:160px;right:-70px}.o-tk span{font-size:32px}}
+@media (max-width:700px){
+  .final{padding:20px 0 90px}
+  .fr{border-radius:32px;padding:8px}
+  .bn{border-radius:26px;padding:56px 18px 170px;min-height:0}
+  .ib{display:none}
+  .o-bub{width:170px;height:130px;left:-34px;bottom:-34px;border-radius:44px 44px 44px 14px}
+  .o-bub::before{top:46px;left:36px}.o-bub::after{top:72px;left:36px}.o-bub i{left:36px;top:104px}
+  .o-tk{width:190px;height:130px;right:-24px;bottom:-30px;border-radius:22px;--n:16px}
+  .o-tk span{font-size:26px;left:26px;top:18px}.o-tk small{left:28px;top:54px;font-size:10px}.o-tk em{left:26px;bottom:20px;width:90px;height:22px}
+  .bn-btns .btn{flex:1 1 150px;justify-content:center}
+  .bn-proof{flex-direction:column;gap:8px}
+}
+@media (prefers-reduced-motion:reduce){.ib{animation:none}}
+/* ============ Footer ============ */
+footer{background:var(--ink);color:var(--sand);padding:80px 0 0;border-radius:48px 48px 0 0;overflow:hidden}
+.f-top{display:grid;grid-template-columns:1.5fr repeat(3,1fr);gap:40px;padding-bottom:50px;border-bottom:1px solid rgb(255 255 255 / .1)}
+.f-top .brand img{height:30px;width:auto;margin-bottom:18px}
+.f-top .brand p{font-size:19px;font-weight:600;line-height:1.35;letter-spacing:-.01em;color:#fff;max-width:280px}
+.f-top h4{color:#fff;font-size:14px;margin-bottom:16px}
+.f-top ul{list-style:none;display:grid;gap:10px;font-size:14.5px}
+.f-top a:hover{color:var(--orange)}
+.f-notice{padding:26px 0;font-size:13px;color:var(--gray);max-width:900px;border-bottom:1px solid rgb(255 255 255 / .1)}
+.f-notice b{color:var(--sand)}
+.f-bot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-top:26px;font-size:13.5px}
+.f-bot nav{display:flex;gap:22px;flex-wrap:wrap}
+.f-bot a:hover{color:#fff}
+.f-word{font-size:clamp(70px,17vw,240px);font-weight:800;letter-spacing:-.06em;line-height:1;color:transparent;-webkit-text-stroke:1px rgb(212 201 184 / .18);text-align:center;margin-top:30px;padding-bottom:.08em;user-select:none}
+
+/* ============ Reveal ============ */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+
+/* ============ Responsive ============ */
+@media (max-width:1080px){
+  .menu,.nav-cta .login{display:none}
+  .burger{display:grid}
+  .mobile-menu.open{display:block;position:absolute;left:0;right:0;top:calc(100% + 10px);background:#fff;border:1px solid var(--line);border-radius:24px;padding:12px;box-shadow:var(--shadow)}
+  .mobile-menu a{display:block;padding:14px 16px;border-radius:14px;font-weight:600}
+  .mobile-menu a:hover{background:var(--cream)}
+  .hero .note{display:none}
+  .bento{grid-template-columns:1fr 1fr}
+  .b-main{grid-column:1/-1;grid-row:auto;order:-1}
+  .badge-spin{left:calc(50% - 50px);top:-58px;width:100px;height:100px}
+  .badge-spin > svg{transform-origin:center}
+  .faq .grid{grid-template-columns:1fr;gap:50px}
+  .f-top{grid-template-columns:1fr 1fr}
+  .f-top .brand{grid-column:1/-1}
+}
+@media (max-width:860px){
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:nth-child(2){border-right:none}
+  .stat:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .ind-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:600px){
+  .wrap{padding:0 16px}
+  .announce nav{display:none}
+  .navbar{padding-left:18px}
+  .nav-cta .btn{display:none}
+  .hero{padding-top:32px}
+  .bento{grid-template-columns:1fr}
+  .kpis{grid-template-columns:1fr 1fr 1fr;gap:6px}
+  .kpi{padding:10px 8px}.kpi b{font-size:18px}
+  .sec{padding:84px 0}
+  .ind-grid{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr}
+  .stat{border-right:none!important;border-bottom:1px solid var(--line)}
+  .stat:last-child{border-bottom:none}
+  .qa summary{font-size:17px}
+  .qa .ans{padding-right:0}
+  .f-top{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .rv{opacity:1;transform:none}
+}
+
+/* ---- hero variation (form in the hero) ---- */
+.form-box.done form{display:none}
+.form-box.done .success{display:block}
+.form-box .success .ok{width:64px;height:64px;border:0;background:var(--orange);color:#fff;transform:none;font-size:0}
+.form-box .success .ok::before{display:none}
+
+.h1{padding:56px 0 90px}
+.h1-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:64px;align-items:center}
+.form-box{background:#fff;border:1px solid var(--line);border-radius:32px;padding:36px 38px 32px;box-shadow:0 40px 80px -40px rgb(60 60 60 / .35);position:relative}
+.fb-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:10px}
+.fb-head h2{font-size:28px;letter-spacing:-.035em;line-height:1.1;margin-top:8px}
+.dur{font-size:12px;font-weight:700;padding:6px 12px;border-radius:999px;background:var(--orange-soft);color:var(--orange);white-space:nowrap}
+.form-box .btn{margin-top:26px}
+.note{position:absolute;left:24px;top:-46px;font-family:var(--hand);font-size:24px;color:var(--gray);transform:rotate(-6deg);display:flex;align-items:flex-end;gap:4px}
+.note svg{color:var(--orange)}
+.copy h1{font-size:clamp(44px,5.6vw,78px);line-height:.98;letter-spacing:-.05em;font-weight:800;margin:22px 0 22px}
+.copy h1 .serif{color:var(--orange);font-weight:400;letter-spacing:-.02em}
+.copy p{font-size:17px;color:var(--gray);max-width:540px}
+.copy .actions{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+.minis{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:40px;max-width:520px}
+.mini{background:#fff;border:1px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;gap:14px;align-items:center}
+.mini .ic{width:40px;height:40px;border-radius:13px;background:var(--orange-soft);color:var(--orange);display:grid;place-items:center;flex:none}
+.mini b{display:block;font-size:20px;letter-spacing:-.03em;line-height:1.1}
+.mini small{color:var(--gray);font-size:12.5px}
+.hlogos{margin-top:38px}
+.hlogos small{display:block;font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gray);margin-bottom:14px}
+.hlogos div{display:flex;gap:26px;align-items:center;flex-wrap:wrap}
+.hlogos img{height:30px;width:auto;filter:grayscale(1);opacity:.6}
+@media (max-width:1100px){.note{display:none}}
+@media (max-width:960px){.h1-grid{grid-template-columns:1fr;gap:40px}.copy{order:-1}}
+@media (max-width:600px){.form-box{padding:26px 20px;border-radius:26px}.minis{grid-template-columns:1fr}}
+.vbar{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:99;display:flex;gap:4px;padding:6px;border-radius:999px;background:var(--charcoal);box-shadow:0 18px 40px -16px rgb(0 0 0 / .5)}
+.vbar a{font-size:13px;font-weight:700;color:var(--sand);padding:8px 14px;border-radius:999px}
+.vbar a.on{background:var(--orange);color:#fff}
+.vbar a:hover:not(.on){color:#fff}
+</style>
+</head>
+<body>
+
+<!-- Announcement -->
+<div class="announce">
+  <div class="wrap">
+    <div><span class="new">NEW</span><b>Qtrac is now Frontlion.</b> <a href="#book" style="text-decoration:underline;text-underline-offset:3px">Request Your Frontlion Platform Demo Today</a></div>
+    <nav aria-label="Utility">
+      <a href="#">Pricing</a><a href="#">Security &amp; Compliance</a><a href="#">Get Support</a><a href="#">Login</a>
+    </nav>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site">
+  <div class="wrap" style="position:relative">
+    <div class="navbar">
+      <a class="logo" href="https://frontlion.com/" aria-label="Frontlion home"><img src="assets/frontlion-logo.svg" alt="Frontlion" width="174" height="33"></a>
+      <ul class="menu">
+        <li><a href="#">Platform</a></li>
+        <li><a href="#">Outcomes</a></li>
+        <li><a href="#serve">Industries</a></li>
+        <li><a href="#">Resources</a></li>
+        <li><a href="#">Company</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a class="login" href="#">Login</a>
+        <a class="btn btn-dark" href="#book">Request a Demo</a>
+        <button class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mm"><span></span></button>
+      </div>
+    </div>
+    <nav class="mobile-menu" id="mm" aria-label="Mobile">
+      <a href="#">Platform</a><a href="#">Outcomes</a><a href="#serve">Industries</a><a href="#">Resources</a><a href="#">Company</a><a href="#">Login</a>
+      <a href="#book" class="btn btn-primary" style="justify-content:center;margin-top:6px;color:#fff">Request a Demo</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<!-- Hero (variation: Split Card) -->
+<section id="book" class="h1">
+  <div class="wrap h1-grid">
+    <div class="copy">
+      <span class="pill"><span class="dots"><i></i><i></i></span>Frontlion Platform Demo</span>
+      <h1>See your <span class="serif">frontline</span> differently.</h1>
+      <p>Most organizations can measure what happens online. The in-person visit is harder to see. Frontlion connects arrival, service, communication, and operational data across every location so teams can understand what is happening, improve the experience, and make better decisions. In a short conversation, we&rsquo;ll show you what that looks like in your environment.</p>
+      <div class="actions"><a href="#" class="btn btn-ghost">Talk to Us Direct <span class="arr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div>
+      <div class="minis">
+        <div class="mini"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg></span><div><b>140+</b><small>active customer organizations</small></div></div>
+        <div class="mini"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span><div><b>Enterprise-grade</b><small>security and compliance</small></div></div>
+      </div>
+      <div class="hlogos"><small>Who We Serve</small><div><img src="assets/logos/logos-cibc-1-213x120.png" alt="CIBC"><img src="assets/logos/logos-aircanada.png" alt="Air Canada"><img src="assets/logos/US_Air_Force_Logo_Solid_Colour.svg" alt="U.S. Air Force"><img src="assets/logos/logos-vca.png" alt="VCA Animal Hospitals"><img src="assets/logos/logos-sdsu.png" alt="San Diego State University"></div></div>
+    </div>
+
+    <div class="form-box" id="formCard">
+      <div class="note" aria-hidden="true">only 15 minutes<svg width="44" height="36" viewBox="0 0 44 36" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 5c14 2 26 10 31 26"/><path d="M41 23l-6 8-7-5"/></svg></div>
+      <div class="fb-head"><div><span class="eyebrow">See It in Action</span><h2>Schedule Your Demo</h2></div><span class="dur">About 15 minutes</span></div>
+      <form class="demo-form" id="demoForm" novalidate>
+        <div class="fgrid">
+          <div class="field"><input id="fn" name="firstname" autocomplete="given-name" placeholder="First Name*" required><label for="fn">First Name<span class="req">*</span></label><span class="msg">Please complete this required field.</span></div>
+          <div class="field"><input id="ln" name="lastname" autocomplete="family-name" placeholder="Last Name*" required><label for="ln">Last Name<span class="req">*</span></label><span class="msg">Please complete this required field.</span></div>
+          <div class="field full"><input id="em" name="email" type="email" autocomplete="email" placeholder="Business Email Address*" required><label for="em">Email<span class="req">*</span></label><span class="msg">Please enter a valid email address.</span></div>
+          <div class="field"><input id="ph" name="phone" type="tel" autocomplete="tel" placeholder="Phone*" required><label for="ph">Phone<span class="req">*</span></label><span class="msg">Please enter a valid phone number.</span></div>
+          <div class="field"><input id="co" name="company" autocomplete="organization" placeholder="Company name*" required><label for="co">Company name<span class="req">*</span></label><span class="msg">Please complete this required field.</span></div>
+          <div class="field full sel"><select id="hq" name="company_hq" required><option value="" disabled selected>Company HQ Location</option><option>North America</option><option>Other</option></select><label for="hq">Company HQ Location<span class="req">*</span></label><span class="msg">Please select an option.</span></div>
+          <div class="field full"><textarea id="ms" name="message" placeholder=" "></textarea><label for="ms">How can we help?</label></div>
+        </div>
+        <button class="btn btn-primary" type="submit">Submit <span class="arr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+      </form>
+      <div class="success" role="status" aria-live="polite"><div class="ok"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><h3>Thank you<span class="ok-name" id="okName"></span>!</h3><p>A Frontlion specialist will be in touch to schedule your demo.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Who we serve -->
+<section class="sec serve" id="serve">
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat rv"><b>140+</b><small>active customer organizations</small></div>
+      <div class="stat rv d1"><b>Enterprise-grade</b><small>security and compliance</small></div>
+      <div class="stat rv d2"><b>Rapid</b><small>deployment and scalable configuration</small></div>
+      <div class="stat rv d3"><b>Proven</b><small>across complex, multi-location environments</small></div>
+    </div>
+
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow rv">Who We Serve</span>
+        <h2 class="h2 rv d1">Built for organizations where in-person service matters.</h2>
+        <p class="lead rv d2" style="margin-top:16px">Frontlion supports banks, healthcare organizations, retailers, government agencies, universities, and transportation operators that need to manage complex service across multiple locations.</p>
+      </div>
+      <a href="#" class="btn btn-ghost rv d2">All Industries <span class="arr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    </div>
+  </div>
+  <div class="serve-arc">
+  <div class="arc-hand l" aria-hidden="true">drag me
+    <svg width="42" height="36" viewBox="0 0 42 36" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 5c14 1 26 9 30 25"/><path d="M26 26l7 6 4-9"/></svg>
+  </div>
+    <div class="arc-stage" id="arcStage" role="list" aria-label="Industries we serve"></div>
+  </div>
+</section>
+
+<!-- Logos -->
+<section class="logos" aria-label="Customers">
+  <p class="cap">Trusted by frontline leaders at</p>
+  <div class="logo-row"><div class="logo-track" id="row1"></div></div>
+  <div class="logo-row rev"><div class="logo-track" id="row2"></div></div>
+</section>
+
+<!-- What you'll explore -->
+<section class="sec" id="explore">
+  <div class="wrap ex2">
+    <div class="ex2-side rv">
+      <span class="eyebrow">What You'll Explore</span>
+      <h2 class="h2">See Frontlion through the lens of your operation.</h2>
+      <p>Every demonstration is built around your locations, service model, and priorities.</p>
+      <p>We'll focus on the parts of the platform that matter most to your team, not a generic product tour.</p>
+      <div class="mods" aria-label="Platform"><span>Appointments &amp; Check-in</span><span>Queue Management</span><span>Customer Communications</span><span>Visit Intelligence</span><span>Staffing Intelligence</span><span>Frontlion AI</span></div>
+      <a href="#book" class="btn btn-primary">Schedule Now <span class="arr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    </div>
+
+    <ol class="ex2-list" id="ex2List">
+      <li class="ex2-item on">
+        <span class="ex2-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="5" cy="12" r="2.5"/><circle cx="19" cy="5" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="M7.5 12h4l5-6M11.5 12l5 6"/></svg></span>
+        <div>
+          <span class="no">01</span>
+          <h3>Connect the in-person journey</h3>
+          <p>Bring appointments, walk-ins, communications, and service workflows together.</p>
+          <div class="ex2-viz" aria-hidden="true"><div><div class="ex2-card">
+            <div class="flow2"><span>Appointments</span><span>Walk-ins</span><span>Communications</span><span>Service workflows</span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><b>One in-person journey</b></div>
+          </div></div></div>
+        </div>
+      </li>
+      <li class="ex2-item">
+        <span class="ex2-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>
+        <div>
+          <span class="no">02</span>
+          <h3>See what is happening across locations</h3>
+          <p>Give teams a consistent view of demand, wait times, service activity, and outcomes.</p>
+          <div class="ex2-viz" aria-hidden="true"><div><div class="ex2-card">
+            <div class="mini-locs"><div style="--w:34%"><span>Location A</span><i></i></div><div class="hot" style="--w:80%"><span>Location B</span><i></i></div><div style="--w:52%"><span>Location C</span><i></i></div></div>
+            <div class="mini-key"><span>Demand</span><span>Wait times</span><span>Service activity</span><span>Outcomes</span></div>
+          </div></div></div>
+        </div>
+      </li>
+      <li class="ex2-item">
+        <span class="ex2-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4M8 11h6"/></svg></span>
+        <div>
+          <span class="no">03</span>
+          <h3>Find friction in the service flow</h3>
+          <p>See where customers wait, abandon, get rerouted, or need more support.</p>
+          <div class="ex2-viz" aria-hidden="true"><div><div class="ex2-card">
+            <div class="mini-chart"><b>Friction found</b><i style="--h:30%"></i><i style="--h:44%"></i><i style="--h:58%"></i><i class="pk" style="--h:92%"></i><i style="--h:66%"></i><i style="--h:40%"></i><i style="--h:34%"></i><i style="--h:48%"></i><i style="--h:28%"></i></div>
+            <div class="friction"><span>Wait</span><span>Abandon</span><span>Rerouted</span><span>Need support</span></div>
+          </div></div></div>
+        </div>
+      </li>
+      <li class="ex2-item">
+        <span class="ex2-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M17 4.5a3.5 3.5 0 0 1 0 7M21.5 20a6.5 6.5 0 0 0-4-6"/></svg></span>
+        <div>
+          <span class="no">04</span>
+          <h3>Give frontline teams more context</h3>
+          <p>Help associates see who is next, why they came, and what should happen next.</p>
+          <div class="ex2-viz" aria-hidden="true"><div><div class="ex2-card">
+            <div class="wwn">
+              <div><small>Who</small><span><span class="tk">Next</span>Your next customer</span></div>
+              <div><small>Why</small><span>The reason they came</span></div>
+              <div><small>Then</small><span>What should happen next</span></div>
+            </div>
+          </div></div></div>
+        </div>
+      </li>
+      <li class="ex2-item">
+        <span class="ex2-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span>
+        <div>
+          <span class="no">05</span>
+          <h3>Turn each visit into operational intelligence</h3>
+          <p>Capture structured visit data that leaders can use to improve service and performance.</p>
+          <div class="ex2-viz" aria-hidden="true"><div><div class="ex2-card">
+            <div class="sdata">
+              <div class="fields"><span>Arrival</span><span>Reason for visit</span><span>Wait</span><span>Service</span><span>Location</span><span>Outcome</span></div>
+              <svg viewBox="0 0 150 90" preserveAspectRatio="none"><path d="M4 76 L34 60 L62 66 L92 38 L120 44 L146 14 V90 H4Z" fill="#C4622D" opacity=".12"/><path d="M4 76 L34 60 L62 66 L92 38 L120 44 L146 14" fill="none" stroke="#C4622D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="146" cy="14" r="5" fill="#C4622D"/></svg>
+            </div>
+          </div></div></div>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec faq">
+  <div class="wrap grid">
+    <div class="side">
+      <span class="eyebrow rv">FAQ</span>
+      <h2 class="h2 rv d1">Frequently Asked Questions</h2>
+      <div class="card rv d3">
+        <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.8 7L3 21l2-6.2A8 8 0 1 1 21 12z"/></svg></span>
+        <div><b>Ask Frontlion</b><a href="#">Chat with our AI assistant →</a></div>
+      </div>
+    </div>
+    <div class="list">
+      <details class="qa rv" open><summary>How long is the Frontlion demo?<span class="tog"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary><p class="ans">Most initial Frontlion demonstrations take about 15 minutes, with additional time available to explore specific workflows, operational challenges, or deployment considerations.</p></details>
+      <details class="qa rv d1"><summary>Is the Frontlion demo tailored to my industry?<span class="tog"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary><p class="ans">Yes. Every Frontlion demo is configured around your environment, priorities, and frontline realities.</p></details>
+      <details class="qa rv d2"><summary>Who should attend a Frontlion demo?<span class="tog"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary><p class="ans">Operations, customer experience, service, branch, location, and transformation leaders are typically the best fit to attend a Frontlion demo. Technical teams can join when deeper integration or deployment questions come up.</p></details>
+      <details class="qa rv d3"><summary>What happens after the Frontlion demo?<span class="tog"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary><p class="ans">After the Frontlion demo concludes, we’ll recommend the most practical next step, which may include a pilot or deployment path. If there isn’t a fit – we’ll tell you.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section class="final" aria-labelledby="finalTitle">
+  <div class="wrap">
+    <div class="fr rv">
+      <div class="bn">
+        <span class="obj o-bub" aria-hidden="true"><i><b></b><b></b><b></b></i></span>
+        <span class="obj o-tk" aria-hidden="true"><span>A-104</span><small>NOW SERVING</small><em></em></span>
+        <span class="ib i1" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span>
+        <span class="ib i2" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>
+        <span class="ib i3" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.8 7L3 21l2-6.2A8 8 0 1 1 21 12z"/></svg></span>
+        <span class="ib i4" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span>
+
+        <div class="bn-in">
+          <span class="bn-tag"><b><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.8 7L3 21l2-6.2A8 8 0 1 1 21 12z"/></svg></b>Talk to Us Direct</span>
+          <h2 id="finalTitle">Prefer a Direct<br>Conversation?</h2>
+          <p>Talk with a Frontlion specialist about your locations, service model, and goals, and we&rsquo;ll connect you with the right person.</p>
+          <div class="bn-btns">
+            <a href="#" class="btn btn-dark">Contact Us <span class="arr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+            <a href="#book" class="btn btn-ghost bn-ghost">Schedule Now <span class="arr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+          </div>
+          <div class="bn-proof"><span class="avs" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span><b>140+</b> active customer organizations</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- Footer -->
+<footer>
+  <div class="wrap">
+    <div class="f-top">
+      <div class="brand"><img src="assets/frontlion-logo-1.svg" alt="Frontlion" width="174" height="33"><p>The In-Person Service Intelligence Platform.</p></div>
+      <div><h4>Platform</h4><ul><li><a href="#">Platform</a></li><li><a href="#">Frontlion AI</a></li><li><a href="#">Integrations</a></li><li><a href="#">Service Maturity Assessment</a></li><li><a href="#">Service Value Assessment</a></li><li><a href="#">Pricing</a></li></ul></div>
+      <div><h4>Resources</h4><ul><li><a href="#">Blog</a></li><li><a href="#">Case Studies</a></li><li><a href="#">Guides</a></li><li><a href="#">Frontlion Versus</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="#">Customer Support</a></li><li><a href="#">Partner with Frontlion</a></li><li><a href="#">Qtrac India</a></li><li><a href="#">Brand Transition Notice</a></li><li><a href="#book">Request a Demo</a></li><li><a href="#">Contact Us</a></li></ul></div>
+    </div>
+    <p class="f-notice"><b>Brand Transition Notice:</b> Some testimonials, case studies and metrics were created under the Qtrac brand. Frontlion is a brand of Qtrac, Inc.</p>
+    <div class="f-bot">
+      <span>© 2026 Frontlion. All rights reserved.</span>
+      <nav><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Cookie Policy</a></nav>
+    </div>
+    <div class="f-word" aria-hidden="true">frontlion</div>
+  </div>
+</footer>
+
+<script>
+// Customer logos (two marquee rows, duplicated for seamless loop)
+const logos=[
+ ["logos-colaph-300x118.png","County of Los Angeles Public Health"],["CWC-Liberty-Caribbean-300x93.png","Liberty Caribbean"],["US_Air_Force_Logo_Solid_Colour.svg","U.S. Air Force"],["logos-cibc-1-213x120.png","CIBC"],["logos-josabank.png","Jos. A. Bank"],["logos-vca.png","VCA Animal Hospitals"],["US-Dept-VA-Logo-B-238x120.png","U.S. Department of Veterans Affairs"],["us-army-300x100.png","U.S. Army"],["logos-orangeco-120x120.png","County of Orange, California"],["logos-atl-263x120.png","Hartsfield-Jackson Atlanta International Airport"],
+ ["logos-aircanada.png","Air Canada"],["logos-sdsu.png","San Diego State University"],["logos-vmbuilding-300x73.png","VM Building Society"],["logos-liberty-99x120.png","Liberty Latin America"],["logos-carrier-enterprises-120x120.png","Carrier Enterprise"],["logos-vfsglobal.png","VFS Global"],["logos-gadph-195x120.png","Georgia Department of Public Health"],["logos-panj-233x120.png","Port Authority of New York and New Jersey"],["logos-mwaa-153x120.png","Metropolitan Washington Airports Authority"],["logos-ncbju-300x68.png","NCB National Commercial Bank"]
+];
+const tile=([f,a],hidden)=>`<div class="lg"${hidden?' aria-hidden="true"':''}><img src="assets/logos/${f}" alt="${hidden?'':a}" loading="lazy"></div>`;
+const fill=(el,list)=>{el.innerHTML=list.map(l=>tile(l)).join('')+list.map(l=>tile(l,true)).join('')};
+fill(document.getElementById('row1'),logos.slice(0,10));
+fill(document.getElementById('row2'),logos.slice(10));
+
+// Curved industry carousel: cards ride an arc, auto-drift, pause on hover, draggable
+(()=>{
+  const ic=p=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
+  const I={
+    bank:ic('<path d="M3 10l9-6 9 6M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 21h18"/>'),
+    health:ic('<path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/>'),
+    retail:ic('<path d="M5 8h14l-1 13H6zM9 8a3 3 0 0 1 6 0"/>'),
+    gov:ic('<path d="M4 21V9l8-5 8 5v12M9 21v-6h6v6M3 21h18"/>'),
+    edu:ic('<path d="M2 9l10-5 10 5-10 5zM6 11v5c3 2.5 9 2.5 12 0v-5"/>'),
+    air:ic('<path d="M10 16l-7-3V11l7 1V5a2 2 0 0 1 4 0v7l7-1v2l-7 3v3l2 2H8l2-2z"/>')
+  };
+  const ui={
+    serve:(t,a,b)=>`<div class="ui"><div class="row"><span class="tk">${t}</span><b>${a}</b></div><div style="margin-top:6px;opacity:.8">${b}</div></div>`,
+    msg:(a,b)=>`<div class="ui"><b>${a}</b>${b}</div>`,
+    bar:(a,b,w)=>`<div class="ui"><b>${a}</b>${b}<div class="bar"><i style="width:${w}%"></i></div></div>`
+  };
+  const cards=[
+    ["k-orange","bank","Banking","Banks",ui.serve("A-104","Account opening","Now serving · Counter 3"),"bank"],
+    ["k-white","health","Healthcare","Healthcare organizations",ui.msg("Your room is ready","Please head to Lab 2."),"clinic"],
+    ["k-dark","retail","Retail","Retailers",ui.bar("Order pickup","Associate on the way",70),"retail2"],
+    ["k-sand","gov","Public Sector","Government agencies",ui.serve("G-310","Permit renewal","Up next · Window 5"),"gov"],
+    ["k-gray","edu","Education","Universities",ui.msg("Advising check-in","Booked for 2:30 PM"),"campus"],
+    ["k-orange","air","Transportation","Transportation operators",ui.bar("Passenger services","Queue moving",45),"airport"],
+    ["k-dark","bank","Banking","Banks",ui.msg("Advisor assigned","Loan consult in 4 min"),"bank2"],
+    ["k-sand","health","Healthcare","Healthcare organizations",ui.bar("Patient flow","Triage → Lab → Consult",60),"hospital"],
+    ["k-white","retail","Retail","Retailers",ui.serve("R-057","Device repair","Checked in · Bay 2"),"retail"],
+    ["k-orange","gov","Public Sector","Government agencies",ui.msg("Appointment confirmed","Window 2 · 11:15 AM"),"gov"],
+    ["k-dark","edu","Education","Universities",ui.serve("E-118","Admissions","Up next · Desk 4"),"campus"],
+    ["k-gray","air","Transportation","Transportation operators",ui.serve("T-019","Cargo desk","Now serving · Desk 1"),"port2"]
+  ];
+  const stage=document.getElementById('arcStage');
+  const els=cards.map(([k,i,name,kind,u,ph])=>{
+    const a=document.createElement('a');a.href='#serve';a.className='acard '+k;a.setAttribute('role','listitem');a.draggable=false;
+    a.innerHTML=`<span class="ph" style="background-image:url(assets/photos/${ph}.jpg)"></span><span class="deco"></span><div class="top"><span class="ic">${I[i]}</span><span class="lab">${name}</span></div><h3>${name}<em>${kind}</em></h3>${u}`;
+    stage.appendChild(a);return a;
+  });
+  const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let off=0,vel=still?0:.45,target=vel,drag=null,moved=0,vis=true;
+  const step=()=>innerWidth<600?206:262;
+  const layout=()=>{
+    const s=step(),total=s*els.length,half=stage.clientWidth/2;
+    els.forEach((el,i)=>{
+      let x=((i*s-off)%total+total)%total; if(x>total/2)x-=total;
+      const n=Math.max(-1.6,Math.min(1.6,x/Math.max(half,320)));
+      el.style.transform=`translateX(${x}px) translateY(${n*n*70}px) rotateZ(${n*9}deg) rotateY(${-n*18}deg) scale(${1-Math.abs(n)*.07})`;
+      el.style.zIndex=100-Math.round(Math.abs(n)*50);
+    });
+  };
+  const loop=()=>{if(vis&&!drag){vel+=(target-vel)*.06;off+=vel}layout();requestAnimationFrame(loop)};
+  new IntersectionObserver(e=>vis=e[0].isIntersecting).observe(stage);
+  stage.addEventListener('mouseenter',()=>target=0);
+  stage.addEventListener('mouseleave',()=>target=still?0:.45);
+  stage.addEventListener('pointerdown',e=>{drag={x:e.clientX,o:off};moved=0;stage.setPointerCapture(e.pointerId);stage.classList.add('drag')});
+  stage.addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-drag.x;moved=Math.max(moved,Math.abs(dx));off=drag.o-dx});
+  const end=()=>{drag=null;stage.classList.remove('drag')};
+  stage.addEventListener('pointerup',end);stage.addEventListener('pointercancel',end);
+  stage.addEventListener('click',e=>{if(moved>6){e.preventDefault();e.stopPropagation()}},true);
+  layout();requestAnimationFrame(loop);
+})();
+// Mobile menu
+const burger=document.querySelector('.burger'),mm=document.getElementById('mm');
+burger.addEventListener('click',()=>{const o=mm.classList.toggle('open');burger.setAttribute('aria-expanded',o)});
+mm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mm.classList.remove('open');burger.setAttribute('aria-expanded',false)}));
+
+// Explore list: the item in the middle of the screen is highlighted and opens its visual
+(()=>{
+  const list=document.getElementById('ex2List');if(!list)return;
+  const items=[...list.querySelectorAll('.ex2-item')];
+  list.classList.add('js');
+  const set=el=>items.forEach(i=>i.classList.toggle('on',i===el));
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)set(e.target)}),{rootMargin:'-45% 0px -45% 0px'});
+  items.forEach(i=>{io.observe(i);i.addEventListener('click',()=>set(i));i.addEventListener('mouseenter',()=>set(i))});
+})();
+
+// Reveal on scroll
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+// Demo form (front-end validation; wire to your CRM endpoint)
+const form=document.getElementById('demoForm');
+form.addEventListener('submit',e=>{
+  e.preventDefault();
+  let ok=true,first=null;
+  form.querySelectorAll('[required]').forEach(inp=>{
+    const f=inp.closest('.field');
+    const v=inp.value.trim(),valid=inp.type==='email'?/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v):inp.type==='tel'?/^\+?[\d\s().-]{7,}$/.test(v):v!=='';
+    f.classList.toggle('err',!valid);
+    if(!valid){ok=false;first=first||inp}
+  });
+  if(!ok){first.focus();return}
+  const n=form.firstname.value.trim();
+  document.getElementById('okName').textContent=n?', '+n:'';
+  document.getElementById('formCard').classList.add('done');
+});
+form.querySelectorAll('input,select').forEach(i=>i.addEventListener('input',()=>i.closest('.field')?.classList.remove('err')));
+</script>
+<nav class="vbar" aria-label="Variations"><a href="../index.html">All</a><a class="on" href="../page-1-split-card/index.html">1</a><a href="../page-2-dark-panel/index.html">2</a><a href="../page-3-ticket/index.html">3</a><a href="../page-4-photo/index.html">4</a></nav>
+</body>
+</html>
