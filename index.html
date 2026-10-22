@@ -579,10 +579,6 @@ footer{background:var(--ink);color:var(--sand);padding:80px 0 0;border-radius:48
 @media (max-width:1100px){.note{display:none}}
 @media (max-width:960px){.h1-grid{grid-template-columns:1fr;gap:40px}.copy{order:-1}}
 @media (max-width:600px){.form-box{padding:26px 20px;border-radius:26px}.minis{grid-template-columns:1fr}}
-.vbar{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:99;display:flex;gap:4px;padding:6px;border-radius:999px;background:var(--charcoal);box-shadow:0 18px 40px -16px rgb(0 0 0 / .5)}
-.vbar a{font-size:13px;font-weight:700;color:var(--sand);padding:8px 14px;border-radius:999px}
-.vbar a.on{background:var(--orange);color:#fff}
-.vbar a:hover:not(.on){color:#fff}
 </style>
 </head>
 <body>
@@ -946,6 +942,5 @@ form.addEventListener('submit',e=>{
 });
 form.querySelectorAll('input,select').forEach(i=>i.addEventListener('input',()=>i.closest('.field')?.classList.remove('err')));
 </script>
-<nav class="vbar" aria-label="Variations"><a href="../index.html">All</a><a class="on" href="../page-1-split-card/index.html">1</a><a href="../page-2-dark-panel/index.html">2</a><a href="../page-3-ticket/index.html">3</a><a href="../page-4-photo/index.html">4</a></nav>
 </body>
 </html>
