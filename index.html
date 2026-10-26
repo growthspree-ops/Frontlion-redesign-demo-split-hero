@@ -5,36 +5,40 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Frontlion Demo · Split Card</title>
 <meta name="description" content="Request a Frontlion platform demo. See how arrival, service, communication and operational data connect across every location.">
+<link rel="canonical" href="https://frontlion.com/demo/">
 <link rel="icon" href="assets/frontlion-logo.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
 <style>
-/* ============ Brand tokens (from the Frontlion logo) ============ */
+/* ============ Brand tokens (Frontlion Brand Guidelines v4.0) ============ */
 :root{
-  --orange:#C4622D;
-  --charcoal:#3C3C3C;
-  --gray:#7A7471;
-  --sand:#D4C9B8;
+  --orange:#D4764A;      /* Deep Coral: CTA / interactive */
+  --coral:#EDA480;       /* Coral: primary accent */
+  --charcoal:#4A4340;    /* Charcoal: primary text */
+  --gray:#8A817C;        /* Warm Gray: secondary text / UI */
+  --sand:#E4D9CC;        /* Warm Beige: neutral surface */
+  --peach:#F5E6DC;       /* Soft Peach: warm background */
 
-  /* tints/shades derived only from the four brand colors */
-  --cream:color-mix(in srgb, var(--sand) 22%, #fff);
-  --cream-2:color-mix(in srgb, var(--sand) 40%, #fff);
-  --orange-soft:color-mix(in srgb, var(--orange) 12%, #fff);
+  /* background system */
+  --bg:#FDFAF7;          /* --bg-primary */
+  --cream:#0e0c0a;       /* --bg-secondary */
+  --cream-2:var(--peach);
+  --bg-warm:#FDF5EF;
+  --orange-soft:color-mix(in srgb, var(--coral) 22%, #fff);
   --orange-deep:color-mix(in srgb, var(--orange) 85%, #000);
-  --ink:color-mix(in srgb, var(--charcoal) 80%, #000);
+  --ink:color-mix(in srgb, var(--charcoal) 88%, #000);
   --line:color-mix(in srgb, var(--sand) 70%, #fff);
 
-  --sans:"Plus Jakarta Sans", system-ui, sans-serif;
-  --serif:"Instrument Serif", Georgia, serif;
-  --hand:"Caveat", cursive;
-  --r-lg:28px; --r-md:20px; --r-sm:14px;
+  --sans:"Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --serif:"Fraunces", Georgia, "Times New Roman", serif;
+  --r-lg:28px; --r-md:20px; --r-sm:14px; --r-img:12px;
   --wrap:1200px;
-  --shadow:0 1px 2px rgb(60 60 60 / .05), 0 12px 32px -12px rgb(60 60 60 / .18);
+  --shadow:0 1px 2px rgb(74 67 64 / .05), 0 12px 32px -12px rgb(74 67 64 / .18);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:var(--sans);color:var(--charcoal);background:var(--cream);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{font-family:var(--sans);color:var(--charcoal);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 button,input,select,textarea{font:inherit;color:inherit}
@@ -60,51 +64,87 @@ button,input,select,textarea{font:inherit;color:inherit}
 .pill .dots{display:inline-flex}
 .pill .dots i{width:10px;height:10px;border-radius:50%;background:var(--orange)}
 .pill .dots i+i{background:var(--charcoal);margin-left:-3px}
-.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--orange)}
-.h2{font-size:clamp(34px,4.6vw,56px);line-height:1.04;letter-spacing:-.035em;font-weight:700;color:var(--charcoal)}
-.h2 .serif{font-size:1.08em}
-.lead{font-size:17px;color:var(--gray);max-width:560px}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;line-height:16px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--orange)}
+.h2{font-family:var(--serif);font-size:clamp(30px,3.4vw,40px);line-height:1.25;letter-spacing:-.01em;font-weight:400;color:var(--charcoal)}
+.h2 .serif{font-size:1em}
+.lead{font-size:18px;line-height:28px;color:var(--gray);max-width:560px}
 
-/* ============ Announcement bar ============ */
-.announce{background:var(--charcoal);color:var(--sand);font-size:13.5px}
-.announce .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:42px;flex-wrap:wrap;padding-top:6px;padding-bottom:6px}
-.announce b{color:#fff;font-weight:600}
-.announce .new{background:var(--orange);color:#fff;padding:2px 9px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.06em;margin-right:10px}
-.announce nav{display:flex;gap:22px}
-.announce nav a:hover{color:#fff}
+/* ============ Utility bar (matches frontlion.com; brand guideline v4 colors + Inter) ============ */
+.announce{--hd-charcoal:#4A4340;background:var(--hd-charcoal);color:#fff;font-family:"Inter",system-ui,sans-serif;font-size:13px;font-weight:400}
+.announce .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:44px;flex-wrap:wrap;padding-top:6px;padding-bottom:6px}
+.announce nav{display:flex;align-items:center;gap:6px;margin-right:-12px}
+.announce nav a{position:relative;display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:6px;font-weight:600;color:#fff;transition:background .2s}
+.announce nav a + a::before{content:"";position:absolute;left:-4px;top:50%;height:16px;margin-top:-8px;border-left:1px solid rgb(255 255 255 / .25)}
+.announce nav a svg{width:13px;height:13px;flex:none}
+.announce nav a:hover{background:rgb(0 0 0 / .28)}
+.announce nav a.login{color:#EDA480}
 
-/* ============ Header ============ */
-header.site{position:sticky;top:12px;z-index:50;margin-top:14px}
-.navbar{display:flex;align-items:center;justify-content:space-between;gap:20px;background:rgb(255 255 255 / .82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:999px;padding:10px 10px 10px 24px;box-shadow:var(--shadow)}
-.navbar .logo img{height:28px;width:auto}
-.menu{display:flex;gap:4px;list-style:none}
-.menu a{display:block;padding:9px 15px;border-radius:999px;font-size:14.5px;font-weight:500;transition:background .2s}
-.menu a:hover{background:var(--cream-2)}
-.nav-cta{display:flex;align-items:center;gap:8px}
-.nav-cta .login{font-size:14.5px;font-weight:600;padding:10px 14px}
-.nav-cta .btn{padding:11px 18px;font-size:14px}
-.burger{display:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:#fff;cursor:pointer;place-items:center}
-.burger span{display:block;width:18px;height:2px;background:var(--charcoal);position:relative}
-.burger span::before,.burger span::after{content:"";position:absolute;left:0;width:18px;height:2px;background:var(--charcoal)}
+/* ============ Header (full-width bar, consistent with frontlion.com) ============ */
+header.site{--hd-charcoal:#4A4340;--hd-gray:#8A817C;--hd-coral:#D4764A;--hd-line:#E4D9CC;position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--hd-line);font-family:"Inter",system-ui,sans-serif;transition:box-shadow .25s}
+header.site.scrolled{box-shadow:0 8px 24px -16px rgb(74 67 64 / .35)}
+.navbar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px;min-height:76px}
+.navbar .logo img{height:30px;width:auto}
+.menu{display:flex;align-self:stretch;gap:4px;list-style:none;justify-self:center}
+.menu > li{display:flex;align-items:center}
+.menu > li > a{display:flex;align-items:center;gap:6px;padding:9px 12px;border-radius:8px;font-size:15px;font-weight:500;color:var(--hd-charcoal);transition:background .2s}
+.menu > li > a .chev{width:14px;height:14px;transition:transform .2s}
+.menu > li:hover > a,.menu > li:focus-within > a{background:#F7F3EE}
+.menu > li:hover > a .chev,.menu > li:focus-within > a .chev{transform:rotate(180deg)}
+/* mega menus (mirror frontlion.com) */
+header.site{--hd-teal:#4A9E9C;--hd-teal-d:#2F6B69;--hd-teal-l:#C8E6E5;--hd-cool:#F4F9F9}
+.mega{position:absolute;left:0;right:0;top:100%;background:#fff;border-top:1px solid var(--hd-line);box-shadow:0 30px 40px -30px rgb(74 67 64 / .35);padding:26px 0 24px;opacity:0;visibility:hidden;transform:translateY(-4px);transition:opacity .2s,transform .2s,visibility .2s}
+.mega::before{content:"";position:absolute;left:0;right:0;top:-12px;height:12px}
+.menu > li:hover .mega,.menu > li:focus-within .mega{opacity:1;visibility:visible;transform:none}
+.mg-ov{font-size:12px;line-height:16px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--hd-coral)}
+.mg-title{font-family:var(--serif);font-size:30px;line-height:38px;font-weight:400;color:var(--hd-charcoal);margin:4px 0 18px}
+.mg-cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.mg-col-h{position:relative;overflow:hidden;border-radius:14px 14px 0 0;padding:20px 30px;min-height:64px;background:linear-gradient(90deg,var(--hd-teal),var(--hd-teal-d));color:#fff}
+.mg-col-h b{position:relative;display:block;font-size:18px;font-weight:600}
+.mg-col-h span{position:relative;display:block;font-size:14px;opacity:.9;margin-top:4px}
+.mg-col-h .wm{position:absolute;left:10px;top:50%;width:84px;height:84px;transform:translateY(-50%);opacity:.12}
+.mg-list{list-style:none;display:grid;gap:4px;padding-top:12px}
+.mg-item{display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px;align-items:center;padding:8px 12px;border-radius:10px;transition:background .2s}
+.mg-item:hover{background:var(--hd-cool)}
+.mg-ic{width:40px;height:40px;border-radius:8px;background:#EAF4F4;color:var(--hd-teal);display:grid;place-items:center}
+.mg-ic svg{width:20px;height:20px}
+.mg-item b{display:block;font-size:14px;line-height:20px;font-weight:600;color:var(--hd-charcoal)}
+.mg-item small{display:block;font-size:12.5px;line-height:18px;color:var(--hd-gray);margin-top:2px}
+.mg-item.t b{color:var(--hd-teal-d)}
+.mg-grid3{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 16px}
+.mg-grid4{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.mg-foot{display:flex;justify-content:space-between;align-items:center;gap:16px;border-top:1px solid var(--hd-line);margin-top:18px;padding-top:16px;font-size:14px;color:var(--hd-gray)}
+.mg-foot .ln{color:var(--hd-coral);font-weight:500;text-decoration:underline;text-underline-offset:3px}
+.mg-pills{display:flex;gap:12px;flex-wrap:wrap}
+.mg-pill{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:8px;background:var(--hd-teal-l);color:var(--hd-teal-d);font-size:14px;font-weight:500;transition:background .2s}
+.mg-pill:hover{background:color-mix(in srgb,var(--hd-teal-l) 80%,var(--hd-teal))}
+.mg-pill svg{width:15px;height:15px}
+.mg-ind{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:40px;align-items:start}
+.mg-card{background:#F7F3EE;border-radius:14px;padding:26px 24px}
+.mg-card b{display:block;font-family:var(--serif);font-size:18px;line-height:26px;font-weight:600;color:var(--hd-charcoal);margin:12px 0 8px}
+.mg-card p:not(.mg-ov){font-size:14px;line-height:22px;color:var(--hd-gray)}
+.mg-card .cta{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:18px;padding:12px 16px;border-radius:6px;background:var(--hd-coral);color:#fff;font-size:14px;font-weight:600}
+.mg-card .cta svg{width:16px;height:16px}
+.nav-cta{display:flex;align-items:center;justify-content:flex-end;gap:8px;grid-column:3}
+.nav-cta .btn{border-radius:6px;padding:12px 22px;font-size:15px;font-weight:600;background:var(--hd-coral);color:#fff;box-shadow:none}
+.nav-cta .btn:hover{background:color-mix(in srgb,var(--hd-coral) 85%,#000)}
+.burger{display:none;width:44px;height:44px;border-radius:10px;border:1px solid var(--hd-line);background:#fff;cursor:pointer;place-items:center}
+.burger span{display:block;width:18px;height:2px;background:var(--hd-charcoal);position:relative}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0;width:18px;height:2px;background:var(--hd-charcoal)}
 .burger span::before{top:-6px}.burger span::after{top:6px}
 .mobile-menu{display:none}
 
 /* ============ Hero ============ */
 .hero{padding:44px 0 40px;text-align:center;position:relative}
-.hero h1{font-size:clamp(42px,6.8vw,88px);line-height:.98;letter-spacing:-.05em;font-weight:800;margin:26px auto 22px;max-width:1000px}
+.hero h1{font-size:clamp(42px,6.8vw,88px);line-height:.98;letter-spacing:-.05em;font-weight:700;margin:26px auto 22px;max-width:1000px}
 .hero h1 .serif{font-weight:400;letter-spacing:-.02em;color:var(--orange);padding-right:.05em}
 .hero p.lead{margin:0 auto;font-size:18.5px}
 .hero .ctas{display:flex;justify-content:center;gap:12px;margin-top:34px;flex-wrap:wrap}
-.hero .note{font-family:var(--hand);font-size:24px;color:var(--gray);position:absolute;display:flex;align-items:center;gap:6px}
-.hero .note svg{color:var(--orange)}
-.hero .note.n1{left:4%;top:300px;transform:rotate(-8deg)}
-.hero .note.n2{right:3%;top:210px;transform:rotate(7deg)}
 
 /* Bento visual */
 .bento{display:grid;grid-template-columns:1fr 1.7fr 1fr;grid-template-rows:auto auto;gap:18px;margin-top:100px;text-align:left;position:relative}
 .card{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:22px;box-shadow:var(--shadow)}
 .b-stat{display:flex;flex-direction:column;justify-content:space-between;min-height:190px}
-.b-stat .num{font-size:58px;font-weight:800;letter-spacing:-.05em;line-height:1}
+.b-stat .num{font-size:58px;font-weight:700;letter-spacing:-.05em;line-height:1}
 .b-stat .num sup{font-size:.45em;color:var(--orange);vertical-align:top;margin-left:2px}
 .b-stat small{color:var(--gray);font-size:14px}
 .b-stat .ico{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:var(--orange-soft);color:var(--orange)}
@@ -122,7 +162,7 @@ header.site{position:sticky;top:12px;z-index:50;margin-top:14px}
 .kpi b{font-size:22px;letter-spacing:-.03em}
 .queue{list-style:none;display:grid;gap:8px;position:relative;z-index:1}
 .queue li{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;background:rgb(255 255 255 / .05);border-radius:14px;padding:10px 12px;font-size:13.5px}
-.queue .tk{font-weight:800;background:var(--sand);color:var(--charcoal);border-radius:9px;padding:5px 8px;font-size:12px}
+.queue .tk{font-weight:700;background:var(--sand);color:var(--charcoal);border-radius:9px;padding:5px 8px;font-size:12px}
 .queue li.now .tk{background:var(--orange);color:#fff}
 .queue .who small{display:block;color:var(--sand);font-size:11.5px}
 .queue .st{font-size:11.5px;font-weight:700;color:var(--sand)}
@@ -152,16 +192,12 @@ header.site{position:sticky;top:12px;z-index:50;margin-top:14px}
 /* Curved industry carousel */
 .arc{padding:110px 0 30px;text-align:center;position:relative}
 .arc .pill{margin-bottom:18px}
-.arc h2{font-size:clamp(34px,5vw,62px);line-height:1;letter-spacing:-.045em;font-weight:800}
+.arc h2{font-size:clamp(34px,5vw,62px);line-height:1;letter-spacing:-.045em;font-weight:700}
 .arc h2 .serif{color:var(--orange);font-weight:400;white-space:nowrap}
 .arc .sub{color:var(--gray);font-size:17px;max-width:520px;margin:16px auto 0}
-.arc-hand{position:absolute;font-family:var(--hand);font-size:24px;color:var(--gray);display:flex;align-items:center;gap:6px}
-.arc-hand svg{color:var(--orange)}
-.arc-hand.l{left:max(24px,calc(50% - 560px));top:200px;transform:rotate(-9deg)}
-.arc-hand.r{right:max(24px,calc(50% - 560px));top:150px;transform:rotate(8deg)}
 .arc-stage{position:relative;height:470px;margin-top:20px;perspective:1600px;overflow:hidden;cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-select:none}
 .arc-stage.drag{cursor:grabbing}
-.acard{position:absolute;left:50%;top:44%;width:240px;height:330px;margin:-165px 0 0 -120px;border-radius:26px;padding:20px;display:flex;flex-direction:column;justify-content:space-between;text-align:left;will-change:transform;box-shadow:0 24px 40px -22px rgb(60 60 60 / .45);overflow:hidden}
+.acard{position:absolute;left:50%;top:44%;width:240px;height:330px;margin:-165px 0 0 -120px;border-radius:26px;padding:20px;display:flex;flex-direction:column;justify-content:space-between;text-align:left;will-change:transform;box-shadow:0 24px 40px -22px rgb(74 67 64 / .45);overflow:hidden}
 .acard .top{display:flex;justify-content:space-between;align-items:center}
 .acard .ic{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:rgb(255 255 255 / .18)}
 .acard .ic svg{width:20px;height:20px}
@@ -171,14 +207,14 @@ header.site{position:sticky;top:12px;z-index:50;margin-top:14px}
 .acard .ui{border-radius:16px;padding:12px;font-size:12.5px;line-height:1.35;background:rgb(255 255 255 / .14);backdrop-filter:blur(4px)}
 .acard .ui b{display:block;font-size:13.5px}
 .acard .ui .row{display:flex;align-items:center;gap:8px}
-.acard .ui .tk{white-space:nowrap;flex:none;font-weight:800;font-size:11.5px;padding:4px 7px;border-radius:7px;background:#fff;color:var(--charcoal)}
+.acard .ui .tk{white-space:nowrap;flex:none;font-weight:700;font-size:11.5px;padding:4px 7px;border-radius:7px;background:#fff;color:var(--charcoal)}
 .acard .ui .bar{height:5px;border-radius:5px;background:rgb(255 255 255 / .2);margin-top:8px;overflow:hidden}
 .acard .ui .bar i{display:block;height:100%;background:currentColor;border-radius:5px}
 /* photo backgrounds, faded into each card's brand color */
 .acard{--tint:var(--orange)}
 .acard .ph{position:absolute;inset:0;background-size:cover;background-position:center;z-index:0;filter:saturate(.85)}
 .acard .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,color-mix(in srgb,var(--tint) 78%,transparent) 0%,color-mix(in srgb,var(--tint) 35%,transparent) 30%,color-mix(in srgb,var(--tint) 62%,transparent) 52%,var(--tint) 80%)}
-.acard > :not(.ph):not(.deco){position:relative;z-index:1}
+.acard > :not(.ph){position:relative;z-index:1}
 .acard.k-white .ph::after,.acard.k-sand .ph::after{background:linear-gradient(180deg,color-mix(in srgb,var(--tint) 82%,transparent) 0%,color-mix(in srgb,var(--tint) 45%,transparent) 26%,color-mix(in srgb,var(--tint) 80%,transparent) 46%,var(--tint) 72%)}
 .acard.k-dark{--tint:var(--charcoal)}.acard.k-sand{--tint:var(--sand)}.acard.k-gray{--tint:var(--gray)}.acard.k-white{--tint:#fff}
 .acard.k-orange{background:var(--orange);color:#fff}
@@ -191,20 +227,17 @@ header.site{position:sticky;top:12px;z-index:50;margin-top:14px}
 .acard.k-sand .ui,.acard.k-white .ui{background:var(--cream)}
 .acard.k-white .ui{background:var(--cream-2)}
 .acard.k-sand .ui .tk,.acard.k-white .ui .tk{background:var(--charcoal);color:#fff}
-.acard.k-sand .ui .bar,.acard.k-white .ui .bar{background:rgb(60 60 60 / .12)}
+.acard.k-sand .ui .bar,.acard.k-white .ui .bar{background:rgb(74 67 64 / .12)}
 .acard.k-sand .ui .bar i,.acard.k-white .ui .bar i{background:var(--orange)}
-.acard .deco{position:absolute;right:-40px;top:70px;width:150px;height:150px;border-radius:50%;border:1.5px solid currentColor;opacity:.12;pointer-events:none}
 .serve-arc{position:relative;margin-top:16px}
 .sec.serve{padding-bottom:10px}
 .serve-arc .arc-stage{height:430px}
-.serve-arc .arc-hand.l{top:-6px}
 .arc-cta{margin-top:-10px;display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap}
 .arc-cta small{color:var(--gray);font-size:14px}
-@media (max-width:860px){.arc-hand{display:none}}
 @media (max-width:600px){
   .arc{padding-top:80px}
   .arc-stage{height:380px}
-  .acard{width:190px;height:270px;margin:-135px 0 0 -95px;padding:16px;border-radius:22px}
+  .acard{width:190px;height:270px;margin:-135px 0 0 -95px;padding:16px;border-radius:var(--r-img)}
   .acard h3{font-size:21px}
   .acard .ui{font-size:11.5px;padding:10px}
 }
@@ -223,7 +256,7 @@ section{position:relative}
 .mini-key{display:flex;gap:6px;margin-top:14px;flex-wrap:wrap}
 .mini-key span{font-size:11.5px;font-weight:600;padding:4px 10px;border-radius:999px;background:var(--cream);color:var(--gray)}
 .mini-chart{display:flex;align-items:flex-end;gap:7px;height:120px;position:relative}
-.mini-chart i{flex:1;height:var(--h);border-radius:7px 7px 3px 3px;background:rgb(60 60 60 / .14)}
+.mini-chart i{flex:1;height:var(--h);border-radius:7px 7px 3px 3px;background:rgb(74 67 64 / .14)}
 .mini-chart i.pk{background:var(--orange)}
 .mini-chart b{position:absolute;top:-6px;left:28%;font-size:11.5px;background:var(--charcoal);color:#fff;padding:5px 9px;border-radius:8px;white-space:nowrap}
 .friction{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
@@ -232,7 +265,7 @@ section{position:relative}
 .wwn div{display:grid;grid-template-columns:62px 1fr;gap:10px;align-items:center;padding:10px 0;font-size:13.5px}
 .wwn div+div{border-top:1px dashed var(--line)}
 .wwn small{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--orange)}
-.wwn .tk{display:inline-block;font-weight:800;font-size:11.5px;padding:3px 7px;border-radius:7px;background:var(--charcoal);color:#fff;margin-right:6px}
+.wwn .tk{display:inline-block;font-weight:700;font-size:11.5px;padding:3px 7px;border-radius:7px;background:var(--charcoal);color:#fff;margin-right:6px}
 .sdata{display:flex;align-items:center;gap:16px}
 .sdata .fields{display:flex;flex-wrap:wrap;gap:8px;flex:1}
 .sdata .fields span{font-size:13px;font-weight:600;padding:8px 13px;border-radius:12px;background:#fff;border:1px solid var(--line)}
@@ -256,13 +289,13 @@ section{position:relative}
 .ex2-ic{width:52px;height:52px;border-radius:16px;background:var(--orange-soft);color:var(--orange);display:grid;place-items:center;transition:background .3s,color .3s}
 .ex2-ic svg{width:22px;height:22px}
 .ex2-item.on .ex2-ic{background:var(--orange);color:#fff}
-.ex2-item .no{font-size:12px;font-weight:800;letter-spacing:.14em;color:var(--orange)}
+.ex2-item .no{font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--orange)}
 .ex2-item h3{font-size:clamp(20px,2vw,25px);letter-spacing:-.03em;line-height:1.2;margin:6px 0 8px}
 .ex2-item p{color:var(--gray);font-size:15.5px;max-width:470px}
 .ex2-viz{display:grid;grid-template-rows:0fr;transition:grid-template-rows .55s ease}
 .ex2-viz > div{overflow:hidden}
 .ex2-list:not(.js) .ex2-viz,.ex2-item.on .ex2-viz{grid-template-rows:1fr}
-.ex2-card{margin-top:20px;background:#fff;border:1px solid var(--line);border-radius:22px;padding:20px;box-shadow:0 20px 40px -30px rgb(60 60 60 / .4)}
+.ex2-card{margin-top:20px;background:#fff;border:1px solid var(--line);border-radius:22px;padding:20px;box-shadow:0 20px 40px -30px rgb(74 67 64 / .4)}
 .flow2{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .flow2 span{font-size:13px;font-weight:600;padding:8px 14px;border-radius:999px;background:var(--cream);border:1px solid var(--line)}
 .flow2 svg{color:var(--orange);flex:none}
@@ -286,10 +319,10 @@ section{position:relative}
 }
 /* ============ Who we serve ============ */
 .serve{background:#fff;border-radius:48px 48px 0 0}
-.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:70px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-bottom:70px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .stat{padding:24px 22px;border-right:1px solid var(--line)}
 .stat:last-child{border-right:none}
-.stat b{display:block;white-space:nowrap;font-size:clamp(20px,1.9vw,27px);letter-spacing:-.03em;line-height:1.1;font-weight:800;margin-bottom:6px}
+.stat b{display:block;white-space:nowrap;font-size:clamp(20px,1.9vw,27px);letter-spacing:-.03em;line-height:1.1;font-weight:700;margin-bottom:6px}
 .stat b .serif{color:var(--orange);font-weight:400}
 .stat small{display:block;color:var(--gray);font-size:13.5px;line-height:1.45}
 .ind-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
@@ -328,7 +361,7 @@ section{position:relative}
 
 /* ============ Book section (demo ticket) ============ */
 .book{padding:110px 0}
-.ticket{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr);filter:drop-shadow(0 34px 44px rgb(60 60 60 / .2))}
+.ticket{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr);filter:drop-shadow(0 34px 44px rgb(74 67 64 / .2))}
 .stub,.tform{--n:20px;position:relative}
 .stub{background:var(--orange);color:#fff;border-radius:36px 0 0 36px;padding:42px 40px 36px;display:flex;flex-direction:column;gap:26px;overflow:hidden;
   -webkit-mask:radial-gradient(circle var(--n) at 100% 0,#0000 98%,#000) top/100% 51% no-repeat,radial-gradient(circle var(--n) at 100% 100%,#0000 98%,#000) bottom/100% 51% no-repeat;
@@ -339,7 +372,7 @@ section{position:relative}
 .stub-top{display:flex;justify-content:space-between;align-items:center;font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:color-mix(in srgb,var(--sand) 55%,#fff)}
 .stub-top span:last-child{background:#fff;color:var(--orange);padding:5px 11px;border-radius:999px;letter-spacing:.08em}
 .stub .eyebrow{color:#fff}
-.stub h2{font-size:clamp(38px,4.4vw,58px);line-height:1;letter-spacing:-.045em;font-weight:800;margin:14px 0 16px}
+.stub h2{font-size:clamp(38px,4.4vw,58px);line-height:1;letter-spacing:-.045em;font-weight:700;margin:14px 0 16px}
 .stub h2 .serif{color:var(--charcoal);font-weight:400}
 .stub .intro{font-size:16.5px;color:color-mix(in srgb,var(--sand) 45%,#fff);max-width:400px}
 .facts3{list-style:none;display:grid;gap:16px;position:relative;z-index:1}
@@ -366,7 +399,7 @@ section{position:relative}
 .field input:focus,.field select:focus,.field textarea:focus{background-size:100% 2px}
 .field input:focus-visible,.field select:focus-visible,.field textarea:focus-visible{outline:none}
 .field textarea{resize:vertical;min-height:96px;line-height:1.5}
-.field select{cursor:pointer;background:linear-gradient(var(--orange),var(--orange)) left bottom/0 2px no-repeat,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23C4622D' stroke-width='2.6' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") right 2px center/14px no-repeat;padding-right:24px}
+.field select{cursor:pointer;background:linear-gradient(var(--orange),var(--orange)) left bottom/0 2px no-repeat,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23D4764A' stroke-width='1.5' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") right 2px center/14px no-repeat;padding-right:24px}
 .field select:focus{background-size:100% 2px,14px}
 .field select:invalid{color:var(--gray)}
 .field label{position:absolute;left:0;top:30px;font-size:16px;font-weight:500;color:var(--gray);pointer-events:none;transition:top .2s,font-size .2s,color .2s,letter-spacing .2s}
@@ -380,7 +413,7 @@ section{position:relative}
 .field.err .msg{display:block}
 .tform .btn{width:auto;justify-content:flex-start;margin-top:30px;padding:15px 22px 15px 28px;font-size:16px}
 .success{display:none;text-align:center;padding:70px 10px}
-.success .ok{width:110px;height:110px;margin:0 auto 22px;border-radius:50%;border:3px solid var(--orange);color:var(--orange);display:grid;place-items:center;transform:rotate(-8deg);font-size:13px;font-weight:800;letter-spacing:.14em;position:relative}
+.success .ok{width:110px;height:110px;margin:0 auto 22px;border-radius:50%;border:3px solid var(--orange);color:var(--orange);display:grid;place-items:center;transform:rotate(-8deg);font-size:13px;font-weight:700;letter-spacing:.14em;position:relative}
 .success .ok::before{content:"";position:absolute;inset:6px;border-radius:50%;border:1.5px dashed var(--orange)}
 .success h3{font-size:26px;letter-spacing:-.03em;margin-bottom:8px}
 .success p{color:var(--gray);max-width:380px;margin:0 auto}
@@ -420,14 +453,14 @@ section{position:relative}
 
 /* ============ Final CTA (framed banner with 3D objects) ============ */
 .final{padding:30px 0 120px}
-.fr{background:#fff;border:1px solid var(--line);border-radius:44px;padding:12px;box-shadow:0 50px 90px -50px rgb(60 60 60 / .45)}
+.fr{background:#fff;border:1px solid var(--line);border-radius:44px;padding:12px;box-shadow:0 50px 90px -50px rgb(74 67 64 / .45)}
 .bn{position:relative;overflow:hidden;border-radius:34px;min-height:460px;display:grid;place-items:center;text-align:center;color:#fff;padding:84px 24px;
   background:radial-gradient(70% 80% at 18% 0%,color-mix(in srgb,var(--sand) 75%,#fff),transparent 60%),radial-gradient(60% 70% at 100% 100%,var(--orange-deep),transparent 70%),linear-gradient(135deg,color-mix(in srgb,var(--orange) 80%,var(--sand)),var(--orange) 55%,var(--orange-deep))}
 .bn::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgb(255 255 255 / .2) 1px,transparent 1px);background-size:20px 20px;-webkit-mask-image:radial-gradient(60% 70% at 50% 40%,#000,transparent);mask-image:radial-gradient(60% 70% at 50% 40%,#000,transparent);pointer-events:none}
 .bn-in{position:relative;z-index:3;max-width:640px}
 .bn-tag{display:inline-flex;align-items:center;gap:8px;padding:6px 14px 6px 6px;border-radius:999px;background:rgb(255 255 255 / .16);border:1px solid rgb(255 255 255 / .3);font-size:13px;font-weight:600;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
 .bn-tag b{width:22px;height:22px;border-radius:50%;background:#fff;color:var(--orange);display:grid;place-items:center}
-.bn h2{font-size:clamp(40px,6vw,78px);line-height:1;letter-spacing:-.05em;font-weight:800;margin:22px 0 18px;text-shadow:0 2px 30px rgb(60 60 60 / .15)}
+.bn h2{font-size:clamp(40px,6vw,78px);line-height:1;letter-spacing:-.05em;font-weight:700;margin:22px 0 18px;text-shadow:0 2px 30px rgb(74 67 64 / .15)}
 .bn h2 .serif{font-weight:400;letter-spacing:-.02em}
 .bn p{font-size:17px;line-height:1.55;color:color-mix(in srgb,var(--sand) 35%,#fff);max-width:520px;margin:0 auto}
 .bn-btns{display:flex;justify-content:center;gap:12px;margin-top:32px;flex-wrap:wrap}
@@ -437,15 +470,16 @@ section{position:relative}
 .bn-ghost:hover .arr{background:var(--orange);color:#fff}
 .bn-proof{display:inline-flex;align-items:center;gap:12px;margin-top:26px;font-size:13.5px;color:color-mix(in srgb,var(--sand) 35%,#fff)}
 .bn-proof .avs{display:flex}
-.bn-proof .avs i{width:30px;height:30px;border-radius:50%;border:2.5px solid color-mix(in srgb,var(--orange) 85%,#fff)}
-.bn-proof .avs i+i{margin-left:-9px}
-.bn-proof .avs i:nth-child(1){background:var(--charcoal)}.bn-proof .avs i:nth-child(2){background:var(--sand)}.bn-proof .avs i:nth-child(3){background:#fff}.bn-proof .avs i:nth-child(4){background:var(--gray)}
+.bn-proof .avs i{width:34px;height:34px;border-radius:50%;border:2.5px solid color-mix(in srgb,var(--orange) 85%,#fff);display:grid;place-items:center}
+.bn-proof .avs svg{width:16px;height:16px}
+.bn-proof .avs i+i{margin-left:-5px}
+.bn-proof .avs i:nth-child(1){background:var(--charcoal);color:#fff}.bn-proof .avs i:nth-child(2){background:var(--sand);color:var(--charcoal)}.bn-proof .avs i:nth-child(3){background:#fff;color:var(--orange)}.bn-proof .avs i:nth-child(4){background:var(--gray);color:#fff}
 .bn-proof b{color:#fff}
 /* 3D glass objects */
 .obj{position:absolute;z-index:2;pointer-events:none}
 .o-bub{left:-46px;bottom:-70px;width:330px;height:240px;border-radius:70px 70px 70px 22px;transform:rotate(-14deg);
   background:linear-gradient(160deg,#fff 10%,color-mix(in srgb,var(--sand) 35%,#fff) 70%,color-mix(in srgb,var(--sand) 70%,#fff));
-  box-shadow:inset 0 3px 0 #fff,inset -14px -20px 40px rgb(196 98 45 / .18),0 40px 60px -30px rgb(60 60 60 / .55)}
+  box-shadow:inset 0 3px 0 #fff,inset -14px -20px 40px rgb(212 118 74 / .18),0 40px 60px -30px rgb(74 67 64 / .55)}
 .o-bub::before,.o-bub::after{content:"";position:absolute;left:54px;height:16px;border-radius:16px;background:color-mix(in srgb,var(--sand) 80%,#fff)}
 .o-bub::before{top:70px;width:58%}
 .o-bub::after{top:104px;width:38%;background:var(--orange);opacity:.85}
@@ -454,15 +488,15 @@ section{position:relative}
 .o-bub i b:nth-child(2){opacity:.55}.o-bub i b:nth-child(3){opacity:.25}
 .o-tk{right:-30px;bottom:-56px;width:300px;height:200px;border-radius:30px;transform:rotate(13deg);--n:22px;
   background:linear-gradient(200deg,#fff 15%,color-mix(in srgb,var(--sand) 40%,#fff) 80%);
-  box-shadow:inset 0 3px 0 #fff,0 40px 60px -30px rgb(60 60 60 / .55);
+  box-shadow:inset 0 3px 0 #fff,0 40px 60px -30px rgb(74 67 64 / .55);
   -webkit-mask:radial-gradient(circle var(--n) at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle var(--n) at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat;
   mask:radial-gradient(circle var(--n) at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle var(--n) at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat}
 .o-tk::before{content:"";position:absolute;left:34px;right:34px;top:50%;border-top:2.5px dashed color-mix(in srgb,var(--sand) 90%,var(--gray))}
-.o-tk span{position:absolute;left:38px;top:30px;font-weight:800;font-size:40px;letter-spacing:-.04em;color:var(--charcoal)}
+.o-tk span{position:absolute;left:38px;top:30px;font-weight:700;font-size:40px;letter-spacing:-.04em;color:var(--charcoal)}
 .o-tk small{position:absolute;left:40px;top:80px;font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--orange)}
 .o-tk em{position:absolute;left:38px;bottom:34px;width:130px;height:30px;background:repeating-linear-gradient(90deg,var(--charcoal) 0 2px,transparent 2px 5px,var(--charcoal) 5px 6px,transparent 6px 9px);opacity:.75}
 /* floating icon badges */
-.ib{position:absolute;z-index:1;width:64px;height:64px;border-radius:50%;background:rgb(255 255 255 / .92);display:grid;place-items:center;color:var(--orange);box-shadow:0 18px 30px -14px rgb(60 60 60 / .5),inset 0 0 0 6px rgb(255 255 255 / .5);animation:bob 7s ease-in-out infinite}
+.ib{position:absolute;z-index:1;width:64px;height:64px;border-radius:50%;background:rgb(255 255 255 / .92);display:grid;place-items:center;color:var(--orange);box-shadow:0 18px 30px -14px rgb(74 67 64 / .5),inset 0 0 0 6px rgb(255 255 255 / .5);animation:bob 7s ease-in-out infinite}
 .ib svg{width:26px;height:26px}
 .ib.i1{left:9%;top:16%;animation-delay:-1s}
 .ib.i2{left:21%;top:40%;width:48px;height:48px;animation-delay:-3s}.ib.i2 svg{width:20px;height:20px}
@@ -496,7 +530,7 @@ footer{background:var(--ink);color:var(--sand);padding:80px 0 0;border-radius:48
 .f-bot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-top:26px;font-size:13.5px}
 .f-bot nav{display:flex;gap:22px;flex-wrap:wrap}
 .f-bot a:hover{color:#fff}
-.f-word{font-size:clamp(70px,17vw,240px);font-weight:800;letter-spacing:-.06em;line-height:1;color:transparent;-webkit-text-stroke:1px rgb(212 201 184 / .18);text-align:center;margin-top:30px;padding-bottom:.08em;user-select:none}
+.f-word{font-size:clamp(70px,17vw,240px);font-weight:700;letter-spacing:-.06em;line-height:1;color:transparent;-webkit-text-stroke:1px rgb(228 217 204 / .18);text-align:center;margin-top:30px;padding-bottom:.08em;user-select:none}
 
 /* ============ Reveal ============ */
 .rv{opacity:0;transform:translateY(28px);transition:opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1)}
@@ -505,12 +539,26 @@ footer{background:var(--ink);color:var(--sand);padding:80px 0 0;border-radius:48
 
 /* ============ Responsive ============ */
 @media (max-width:1080px){
-  .menu,.nav-cta .login{display:none}
+  .menu{display:none}
   .burger{display:grid}
-  .mobile-menu.open{display:block;position:absolute;left:0;right:0;top:calc(100% + 10px);background:#fff;border:1px solid var(--line);border-radius:24px;padding:12px;box-shadow:var(--shadow)}
-  .mobile-menu a{display:block;padding:14px 16px;border-radius:14px;font-weight:600}
-  .mobile-menu a:hover{background:var(--cream)}
-  .hero .note{display:none}
+  .mobile-menu.open{display:block;position:absolute;left:0;right:0;top:100%;max-height:calc(100vh - 110px);overflow-y:auto;overscroll-behavior:contain;background:#fff;border-bottom:1px solid var(--hd-line);padding:6px 16px 20px;box-shadow:0 20px 30px -20px rgb(74 67 64 / .3)}
+  .mm-g{border-bottom:1px solid #F7F3EE}
+  .mm-g summary{list-style:none;display:flex;justify-content:space-between;align-items:center;padding:15px 8px;font-size:16px;font-weight:500;color:var(--hd-charcoal);cursor:pointer}
+  .mm-g summary::-webkit-details-marker{display:none}
+  .mm-g summary svg{width:16px;height:16px;color:var(--hd-gray);transition:transform .2s}
+  .mm-g[open] summary{color:var(--hd-coral)}
+  .mm-g[open] summary svg{transform:rotate(180deg);color:var(--hd-coral)}
+  .mm-l{padding:0 0 12px}
+  .mm-l a{display:block;padding:9px 12px;border-radius:8px;font-size:14.5px;color:var(--hd-charcoal)}
+  .mm-l a:hover{background:var(--hd-cool);color:var(--hd-teal-d)}
+  .mm-l a.more{color:var(--hd-coral);font-weight:500}
+  .mm-h{display:block;padding:12px 12px 4px;font-size:11px;line-height:16px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--hd-gray)}
+  .mm-u{display:grid;padding:6px 0 18px}
+  .mm-u a{display:flex;align-items:center;gap:12px;padding:14px 8px;border-bottom:1px solid #F7F3EE;font-size:16px;font-weight:500;color:var(--hd-charcoal);transition:color .2s}
+  .mm-u a svg{width:17px;height:17px;flex:none}
+  .mm-u a:hover,.mm-u a.login{color:var(--hd-coral)}
+  .mm-cta{display:flex;justify-content:center;align-items:center;padding:14px;border-radius:6px;background:var(--hd-coral);color:#fff;font-size:15px;font-weight:600}
+
   .bento{grid-template-columns:1fr 1fr}
   .b-main{grid-column:1/-1;grid-row:auto;order:-1}
   .badge-spin{left:calc(50% - 50px);top:-58px;width:100px;height:100px}
@@ -520,15 +568,13 @@ footer{background:var(--ink);color:var(--sand);padding:80px 0 0;border-radius:48
   .f-top .brand{grid-column:1/-1}
 }
 @media (max-width:860px){
-  .stats{grid-template-columns:1fr 1fr}
-  .stat:nth-child(2){border-right:none}
-  .stat:nth-child(-n+2){border-bottom:1px solid var(--line)}
   .ind-grid{grid-template-columns:1fr 1fr}
 }
 @media (max-width:600px){
   .wrap{padding:0 16px}
   .announce nav{display:none}
-  .navbar{padding-left:18px}
+  .navbar{min-height:64px}
+  .navbar .logo img{height:26px}
   .nav-cta .btn{display:none}
   .hero{padding-top:32px}
   .bento{grid-template-columns:1fr}
@@ -556,14 +602,12 @@ footer{background:var(--ink);color:var(--sand);padding:80px 0 0;border-radius:48
 
 .h1{padding:56px 0 90px}
 .h1-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:64px;align-items:center}
-.form-box{background:#fff;border:1px solid var(--line);border-radius:32px;padding:36px 38px 32px;box-shadow:0 40px 80px -40px rgb(60 60 60 / .35);position:relative}
+.form-box{background:#fff;border:1px solid var(--line);border-radius:32px;padding:36px 38px 32px;box-shadow:0 40px 80px -40px rgb(74 67 64 / .35);position:relative}
 .fb-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:10px}
 .fb-head h2{font-size:28px;letter-spacing:-.035em;line-height:1.1;margin-top:8px}
 .dur{font-size:12px;font-weight:700;padding:6px 12px;border-radius:999px;background:var(--orange-soft);color:var(--orange);white-space:nowrap}
 .form-box .btn{margin-top:26px}
-.note{position:absolute;left:24px;top:-46px;font-family:var(--hand);font-size:24px;color:var(--gray);transform:rotate(-6deg);display:flex;align-items:flex-end;gap:4px}
-.note svg{color:var(--orange)}
-.copy h1{font-size:clamp(44px,5.6vw,78px);line-height:.98;letter-spacing:-.05em;font-weight:800;margin:22px 0 22px}
+.copy h1{font-size:clamp(44px,5.6vw,78px);line-height:.98;letter-spacing:-.05em;font-weight:700;margin:22px 0 22px}
 .copy h1 .serif{color:var(--orange);font-weight:400;letter-spacing:-.02em}
 .copy p{font-size:17px;color:var(--gray);max-width:540px}
 .copy .actions{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
@@ -576,9 +620,48 @@ footer{background:var(--ink);color:var(--sand);padding:80px 0 0;border-radius:48
 .hlogos small{display:block;font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gray);margin-bottom:14px}
 .hlogos div{display:flex;gap:26px;align-items:center;flex-wrap:wrap}
 .hlogos img{height:30px;width:auto;filter:grayscale(1);opacity:.6}
-@media (max-width:1100px){.note{display:none}}
 @media (max-width:960px){.h1-grid{grid-template-columns:1fr;gap:40px}.copy{order:-1}}
 @media (max-width:600px){.form-box{padding:26px 20px;border-radius:26px}.minis{grid-template-columns:1fr}}
+
+/* ============ Brand typography (Guidelines v4.0: Fraunces headings, Inter UI/body) ============ */
+.copy h1{font-family:var(--serif);font-size:clamp(40px,4.4vw,52px);line-height:1.15;letter-spacing:-.015em;font-weight:400;margin:22px 0 20px}
+.copy h1 .serif{color:var(--orange);letter-spacing:-.015em}
+.copy p{font-size:18px;line-height:28px}
+.fb-head h2{font-family:var(--serif);font-size:30px;line-height:38px;letter-spacing:-.01em;font-weight:400}
+.bn h2{font-family:var(--serif);font-size:clamp(36px,4.6vw,52px);line-height:1.15;letter-spacing:-.015em;font-weight:400}
+.ex2-item h3,.ind h3,.success h3{font-family:var(--serif);font-size:22px;line-height:30px;letter-spacing:0;font-weight:400}
+.acard h3{font-family:var(--serif);font-weight:400;letter-spacing:-.01em}
+.acard h3 em{font-family:var(--sans)}
+.qa summary{font-size:17px;line-height:24px;font-weight:600;letter-spacing:0}
+.stat b,.mini b{font-family:var(--sans);font-weight:700;letter-spacing:-.01em}
+.mini b{font-size:17px}
+.pill{font-size:13px;font-weight:500}
+.lab,.acard .lab,.ind .lab,.hlogos small,.logos .cap,.ex2-item .no,.tform-head b{font-size:11px;line-height:16px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase}
+.dur{font-weight:500}
+/* image containers: 12px radius */
+.acard{border-radius:var(--r-img)}
+.acard .ui{border-radius:8px}
+/* handwritten notes (Caveat, kept by request) */
+.note{position:absolute;left:24px;top:-46px;font-family:"Caveat",cursive;font-size:24px;color:var(--gray);transform:rotate(-6deg);display:flex;align-items:flex-end;gap:4px}
+.note svg{color:var(--orange)}
+.arc-hand{position:absolute;font-family:"Caveat",cursive;font-size:24px;color:var(--gray);display:flex;align-items:center;gap:6px}
+.arc-hand svg{color:var(--orange)}
+.arc-hand.l{left:max(24px,calc(50% - 560px));top:-6px;transform:rotate(-9deg)}
+@media (max-width:1100px){.note{display:none}}
+@media (max-width:860px){.arc-hand{display:none}}
+/* Brand Transition Notice dialog */
+.btn-notice{position:fixed;inset:0;margin:auto;width:min(680px,calc(100% - 32px));max-height:calc(100% - 32px);overflow:auto;background:#3A302C;color:color-mix(in srgb,var(--sand) 70%,#fff);border:1px solid rgb(255 255 255 / .1);border-radius:14px;padding:40px 34px 44px;box-shadow:0 30px 60px -20px rgb(0 0 0 / .6)}
+.btn-notice::backdrop{background:rgb(20 18 17 / .6)}
+.btn-notice[open]{animation:bnIn .25s ease}
+@keyframes bnIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.btn-notice h2{font-family:var(--serif);font-weight:600;font-size:21px;line-height:1.3;color:#fff;margin-bottom:16px;padding-right:40px}
+.btn-notice p{font-size:16px;line-height:26px}
+.bt-x{position:absolute;right:16px;top:16px;width:34px;height:34px;border-radius:50%;border:1px solid rgb(255 255 255 / .35);background:rgb(255 255 255 / .08);color:#fff;display:grid;place-items:center;cursor:pointer;transition:background .2s}
+.bt-x:hover{background:rgb(255 255 255 / .18)}
+/* HubSpot bridge */
+.hs-offscreen{position:absolute;left:-10000px;top:0;width:600px;height:1px;overflow:hidden}
+.form-err{margin-top:18px;font-size:14px;color:var(--orange)}
+.demo-form .btn[disabled]{opacity:.75;cursor:progress;transform:none}
 </style>
 </head>
 <body>
@@ -586,34 +669,36 @@ footer{background:var(--ink);color:var(--sand);padding:80px 0 0;border-radius:48
 <!-- Announcement -->
 <div class="announce">
   <div class="wrap">
-    <div><span class="new">NEW</span><b>Qtrac is now Frontlion.</b> <a href="#book" style="text-decoration:underline;text-underline-offset:3px">Request Your Frontlion Platform Demo Today</a></div>
+    <div>Qtrac is now Frontlion.</div>
     <nav aria-label="Utility">
-      <a href="#">Pricing</a><a href="#">Security &amp; Compliance</a><a href="#">Get Support</a><a href="#">Login</a>
+      <a href="https://frontlion.com/pricing/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8M12 18V6"/></svg>Pricing</a>
+      <a href="https://frontlion.com/platform/security-compliance"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>Security &amp; Compliance</a>
+      <a href="https://support.frontlion.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Zm0 0a9 9 0 1 1 18 0m0 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3Z"/><path d="M21 16v2a4 4 0 0 1-4 4h-5"/></svg>Get Support</a>
+      <a class="login" href="https://app.qtrac.com/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/></svg>Login</a>
     </nav>
   </div>
 </div>
 
 <!-- Header -->
 <header class="site">
-  <div class="wrap" style="position:relative">
+  <div class="wrap">
     <div class="navbar">
       <a class="logo" href="https://frontlion.com/" aria-label="Frontlion home"><img src="assets/frontlion-logo.svg" alt="Frontlion" width="174" height="33"></a>
       <ul class="menu">
-        <li><a href="#">Platform</a></li>
-        <li><a href="#">Outcomes</a></li>
-        <li><a href="#serve">Industries</a></li>
-        <li><a href="#">Resources</a></li>
-        <li><a href="#">Company</a></li>
+        <li><a href="https://frontlion.com/platform/" aria-haspopup="true">Platform <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a><div class="mega"><div class="wrap"><p class="mg-ov">Platform Architecture</p><p class="mg-title">Pillars and Features</p><div class="mg-cols"><div class="mg-col"><div class="mg-col-h"><svg class="wm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/></svg><b>Improve the Experience</b></div><ul class="mg-list"><li><a class="mg-item" href="https://frontlion.com/platform/appointment-check-in/"><span class="mg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18M9 16l2 2 4-4"/></svg></span><span><b>Appointments &amp; Check-in</b><small>Book in seconds, arrive to a match.</small></span></a></li><li><a class="mg-item" href="https://frontlion.com/platform/queue-management/"><span class="mg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span><b>Queue Management</b><small>Join by QR, kiosk, or text; wait anywhere.</small></span></a></li><li><a class="mg-item" href="https://frontlion.com/platform/customer-communications/"><span class="mg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2z"/><path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1"/></svg></span><span><b>Customer Communications</b><small>Two-way SMS, WhatsApp, RCS, and email.</small></span></a></li></ul></div><div class="mg-col"><div class="mg-col-h"><svg class="wm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></svg><b>Orchestrate the Service</b></div><ul class="mg-list"><li><a class="mg-item" href="https://frontlion.com/platform/associate-interface/"><span class="mg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span><span><b>Associate Interface</b><small>Customer context, guides, and next steps.</small></span></a></li><li><a class="mg-item" href="https://frontlion.com/platform/routing-prioritization/"><span class="mg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></svg></span><span><b>Routing &amp; Prioritization</b><small>The console where routed work arrives.</small></span></a></li><li><a class="mg-item" href="https://frontlion.com/platform/supervisor-controls/"><span class="mg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 18v-6a5 5 0 1 1 10 0v6"/><path d="M5 21a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-1a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2z"/><path d="M21 12h1M18.5 4.5 18 5M2 12h1M12 2v1M4.93 4.93l.71.71"/></svg></span><span><b>Supervisor Controls &amp; Alerts</b><small>Live oversight and one-tap response.</small></span></a></li></ul></div><div class="mg-col"><div class="mg-col-h"><svg class="wm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.94 15.5A2 2 0 0 0 8.5 14.06l-6.14-1.58a.5.5 0 0 1 0-.96L8.5 9.94A2 2 0 0 0 9.94 8.5l1.58-6.14a.5.5 0 0 1 .96 0l1.58 6.14a2 2 0 0 0 1.44 1.44l6.14 1.58a.5.5 0 0 1 0 .96l-6.14 1.58a2 2 0 0 0-1.44 1.44l-1.58 6.14a.5.5 0 0 1-.96 0z"/></svg><b>Make it Intelligent</b></div><ul class="mg-list"><li><a class="mg-item" href="https://frontlion.com/platform/visit-intelligence/"><span class="mg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="m19 9-5 5-4-4-3 3"/></svg></span><span><b>Visit Intelligence</b><small>Service, wait, and outcome becomes a record.</small></span></a></li><li><a class="mg-item" href="https://frontlion.com/platform/multi-location-insights/"><span class="mg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3M12 12V8"/></svg></span><span><b>Multi-Location Insights</b><small>Every location, explained.</small></span></a></li><li><a class="mg-item" href="https://frontlion.com/platform/staffing-intelligence/"><span class="mg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5M16 2v4M8 2v4M3 10h5"/><circle cx="16" cy="16" r="6"/><path d="M16 14v2.2l1.6 1"/></svg></span><span><b>Staffing Intelligence</b><small>Forecast demand by hour and staff to the curve.</small></span></a></li></ul></div></div><div class="mg-foot"><p>Explore all platform capabilities and architecture details. <a class="ln" href="https://frontlion.com/platform/">View the Platform Overview</a></p><div class="mg-pills"><a class="mg-pill" href="https://frontlion.com/platform/frontlion-ai/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.94 15.5A2 2 0 0 0 8.5 14.06l-6.14-1.58a.5.5 0 0 1 0-.96L8.5 9.94A2 2 0 0 0 9.94 8.5l1.58-6.14a.5.5 0 0 1 .96 0l1.58 6.14a2 2 0 0 0 1.44 1.44l6.14 1.58a.5.5 0 0 1 0 .96l-6.14 1.58a2 2 0 0 0-1.44 1.44l-1.58 6.14a.5.5 0 0 1-.96 0z"/></svg>Frontlion AI</a><a class="mg-pill" href="https://frontlion.com/platform/integrations/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22v-5M9 8V2M15 8V2M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/></svg>Integrations</a><a class="mg-pill" href="https://frontlion.com/platform/retail-media/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m10 8 6 4-6 4z"/></svg>Retail Media</a></div></div></div></div></li>
+        <li><a href="#" aria-haspopup="true">Outcomes <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a><div class="mega"><div class="wrap"><p class="mg-ov">Explore Outcomes</p><p class="mg-title">Explore specific business outcomes</p><div class="mg-cols"><div class="mg-col"><div class="mg-col-h"><svg class="wm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 7l-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></svg><b>Increase Revenue</b><span>Conversion, retention, and monetization</span></div><ul class="mg-list"><li><a class="mg-item" href="https://frontlion.com/outcomes/reduce-abandonment-no-shows/"><span class="mg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg></span><span><b>Reduce Abandonment &amp; No-Shows</b><small>Bring back the customers who walked away.</small></span></a></li><li><a class="mg-item" href="https://frontlion.com/outcomes/increase-conversion-cross-sell/"><span class="mg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3 4 7l4 4M4 7h16M16 21l4-4-4-4M20 17H4"/></svg></span><span><b>Increase Conversion &amp; Cross-Sell</b><small>Deliver relevant recommendations and offers.</small></span></a></li><li><a class="mg-item" href="https://frontlion.com/outcomes/convert-wait-time-into-productive-time/"><span class="mg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 7l-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></svg></span><span><b>Convert Wait Time into Productive Time</b><small>Every minute of dwell time is a revenue opportunity.</small></span></a></li></ul></div><div class="mg-col"><div class="mg-col-h"><svg class="wm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg><b>Improve Operations</b><span>Efficiency, staffing, and internal performance</span></div><ul class="mg-list"><li><a class="mg-item" href="https://frontlion.com/outcomes/reduce-congestion/"><span class="mg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span><span><b>Smooth Demand &amp; Reduce Congestion</b><small>Spread the load so every hour runs at its best.</small></span></a></li><li><a class="mg-item" href="https://frontlion.com/outcomes/operational-performance/"><span class="mg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></span><span><b>Improve Operational Performance</b><small>Operate with precision, not guesswork.</small></span></a></li><li><a class="mg-item" href="https://frontlion.com/outcomes/improve-employee-experience-efficiency/"><span class="mg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span><b>Improve Employee Experience &amp; Efficiency</b><small>Give your team the tools to do their best work.</small></span></a></li></ul></div><div class="mg-col"><div class="mg-col-h"><svg class="wm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg><b>Enhance Customer Satisfaction</b><span>Frictionless, engaging service interactions</span></div><ul class="mg-list"><li><a class="mg-item" href="https://frontlion.com/outcomes/reduce-booking-and-check-in-friction/"><span class="mg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.5 4.9 13 2.2a.5.5 0 0 1 .9.5l-1.4 4.3M15.7 10H20a1 1 0 0 1 .8 1.6l-1.7 1.8M16.3 16.3l-3.4 5.5a.5.5 0 0 1-.9-.5l1.9-6A1 1 0 0 0 13 14H4a1 1 0 0 1-.8-1.6l4.5-4.7M2 2l20 20"/></svg></span><span><b>Reduce Booking &amp; Check-In friction</b><small>Remove the bottlenecks slowing your team down.</small></span></a></li><li><a class="mg-item" href="https://frontlion.com/outcomes/reduce-wait-time/"><span class="mg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 2h4M12 14l3-3"/><circle cx="12" cy="14" r="8"/></svg></span><span><b>Reduce Wait Time &amp; Improve Visitor Flow</b><small>Turn idle wait time into a competitive advantage.</small></span></a></li><li><a class="mg-item" href="https://frontlion.com/outcomes/increase-engagement/"><span class="mg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg></span><span><b>Increase Customer Engagement</b><small>Turn the visit into a conversation, not a transaction.</small></span></a></li></ul></div></div><div class="mg-foot"><p>Explore all available outcomes and supporting solutions. <a class="ln" href="https://frontlion.com/resource-type/case-studies/">View all Case Studies</a></p><div class="mg-pills"><a class="mg-pill" href="https://frontlion.com/platform/frontlion-ai/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.94 15.5A2 2 0 0 0 8.5 14.06l-6.14-1.58a.5.5 0 0 1 0-.96L8.5 9.94A2 2 0 0 0 9.94 8.5l1.58-6.14a.5.5 0 0 1 .96 0l1.58 6.14a2 2 0 0 0 1.44 1.44l6.14 1.58a.5.5 0 0 1 0 .96l-6.14 1.58a2 2 0 0 0-1.44 1.44l-1.58 6.14a.5.5 0 0 1-.96 0z"/></svg>Frontlion AI</a><a class="mg-pill" href="https://frontlion.com/platform/integrations/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22v-5M9 8V2M15 8V2M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/></svg>Integrations</a><a class="mg-pill" href="https://frontlion.com/platform/retail-media/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m10 8 6 4-6 4z"/></svg>Retail Media</a></div></div></div></div></li>
+        <li><a href="#serve" aria-haspopup="true">Industries <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a><div class="mega"><div class="wrap"><div class="mg-ind"><div><p class="mg-ov">Industries We Serve</p><p class="mg-title">Solutions tailored to your industry</p><ul class="mg-list mg-grid3"><li><a class="mg-item t" href="https://frontlion.com/industry/retail/"><span class="mg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg></span><span><b>Retail</b><small>Sell smarter across every channel.</small></span></a></li><li><a class="mg-item t" href="https://frontlion.com/industry/banking/"><span class="mg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 15h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 17"/><path d="m7 21 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9M2 16l6 6"/><circle cx="16" cy="9" r="2.9"/><circle cx="6" cy="5" r="3"/></svg></span><span><b>Banking</b><small>Accelerate revenue with regulations.</small></span></a></li><li><a class="mg-item t" href="https://frontlion.com/industry/healthcare/"><span class="mg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/></svg></span><span><b>Healthcare</b><small>Grow patient and provider relations.</small></span></a></li><li><a class="mg-item t" href="https://frontlion.com/industry/education/"><span class="mg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></span><span><b>Education</b><small>Advisors that pass the test.</small></span></a></li><li><a class="mg-item t" href="https://frontlion.com/industry/public-sector/"><span class="mg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 22h18M6 18v-7M10 18v-7M14 18v-7M18 18v-7M12 2l8 5H4z"/></svg></span><span><b>Public Sector</b><small>Build public trust.</small></span></a></li><li><a class="mg-item t" href="https://frontlion.com/industry/transportation/"><span class="mg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2M15 18H9M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg></span><span><b>Transportation</b><small>Every journey deserves to keep moving.</small></span></a></li></ul></div><div class="mg-card"><p class="mg-ov">Customer Success</p><b>See how companies like yours use Frontlion</b><p>Browse case studies filtered by your industry.</p><a class="cta" href="https://frontlion.com/resources/?type=case-studies">See All Case Studies <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></div></div></div></li>
+        <li><a href="https://frontlion.com/resources/" aria-haspopup="true">Resources <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a><div class="mega"><div class="wrap"><p class="mg-ov">Resources</p><p class="mg-title">Guides, Reports, and Learning Resources</p><ul class="mg-list mg-grid4"><li><a class="mg-item" href="https://frontlion.com/resource-type/case-studies/"><span class="mg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 20v-4M12 20V10M18 20V4"/></svg></span><span><b>Case Studies</b><small>Industry solutions.</small></span></a></li><li><a class="mg-item" href="https://frontlion.com/resource-type/guides/"><span class="mg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg></span><span><b>Guides</b><small>Guides to help your business perform.</small></span></a></li><li><a class="mg-item" href="https://frontlion.com/resource-type/blog/"><span class="mg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18h-5M18 14h-8M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-4 0v-9a2 2 0 0 1 2-2h2"/><rect width="8" height="4" x="10" y="6" rx="1"/></svg></span><span><b>Blog</b><small>Blog posts and articles.</small></span></a></li><li><a class="mg-item" href="https://frontlion.com/resource-type/comparisons/"><span class="mg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7M11 18H8a2 2 0 0 1-2-2V9"/></svg></span><span><b>Frontlion Versus</b><small>See how Frontlion stacks up.</small></span></a></li></ul></div></div></li>
+        <li><a href="#" aria-haspopup="true">Company <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a><div class="mega"><div class="wrap"><p class="mg-ov">Company</p><p class="mg-title">Meet the Team Behind Frontlion</p><ul class="mg-list mg-grid4"><li><a class="mg-item" href="https://frontlion.com/about/"><span class="mg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5M12 7v5l4 2"/></svg></span><span><b>About</b><small>Who we are and where we started.</small></span></a></li><li><a class="mg-item" href="https://frontlion.com/company/why-frontlion/"><span class="mg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/></svg></span><span><b>Why Frontlion</b><small>What sets us apart from the rest.</small></span></a></li><li><a class="mg-item" href="https://frontlion.com/company/customer-support/"><span class="mg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Zm0 0a9 9 0 1 1 18 0m0 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3Z"/><path d="M21 16v2a4 4 0 0 1-4 4h-5"/></svg></span><span><b>Customer Support</b><small>Get help from our team, fast.</small></span></a></li><li><a class="mg-item" href="https://frontlion.com/contact/"><span class="mg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span><span><b>Contact Us</b><small>Reach out, we&rsquo;d love to hear from you.</small></span></a></li></ul><div class="mg-foot"><p>Learn more about Frontlion and the team behind the platform. <a class="ln" href="https://frontlion.com/about/">View Company Overview</a></p><div class="mg-pills"><a class="mg-pill" href="https://frontlion.com/qtrac-india/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20M2 12h20"/></svg>Qtrac India</a><a class="mg-pill" href="https://frontlion.com/partners/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>Partner with Frontlion</a></div></div></div></div></li>
       </ul>
       <div class="nav-cta">
-        <a class="login" href="#">Login</a>
-        <a class="btn btn-dark" href="#book">Request a Demo</a>
+        <a class="btn" href="#book">Request a Demo</a>
         <button class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mm"><span></span></button>
       </div>
     </div>
     <nav class="mobile-menu" id="mm" aria-label="Mobile">
-      <a href="#">Platform</a><a href="#">Outcomes</a><a href="#serve">Industries</a><a href="#">Resources</a><a href="#">Company</a><a href="#">Login</a>
-      <a href="#book" class="btn btn-primary" style="justify-content:center;margin-top:6px;color:#fff">Request a Demo</a>
+      <a href="https://frontlion.com/platform/">Platform</a><a href="#">Outcomes</a><a href="#serve">Industries</a><a href="https://frontlion.com/resources/">Resources</a><a href="#">Company</a><a href="https://app.qtrac.com/">Login</a>
+      <a href="#book" class="btn btn-primary" style="justify-content:center;margin-top:12px;color:#fff;background:#D4764A;border:0">Request a Demo</a>
     </nav>
   </div>
 </header>
@@ -626,16 +711,16 @@ footer{background:var(--ink);color:var(--sand);padding:80px 0 0;border-radius:48
       <span class="pill"><span class="dots"><i></i><i></i></span>Frontlion Platform Demo</span>
       <h1>See your <span class="serif">frontline</span> differently.</h1>
       <p>Most organizations can measure what happens online. The in-person visit is harder to see. Frontlion connects arrival, service, communication, and operational data across every location so teams can understand what is happening, improve the experience, and make better decisions. In a short conversation, we&rsquo;ll show you what that looks like in your environment.</p>
-      <div class="actions"><a href="#" class="btn btn-ghost">Talk to Us Direct <span class="arr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div>
+      <div class="actions"><a href="https://frontlion.com/contact/" class="btn btn-ghost">Talk to Us Direct <span class="arr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div>
       <div class="minis">
-        <div class="mini"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg></span><div><b>140+</b><small>active customer organizations</small></div></div>
-        <div class="mini"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span><div><b>Enterprise-grade</b><small>security and compliance</small></div></div>
+        <div class="mini"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg></span><div><b>Multi-location</b><small>complex environments</small></div></div>
+        <div class="mini"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span><div><b>Enterprise-grade</b><small>security and compliance</small></div></div>
       </div>
       <div class="hlogos"><small>Who We Serve</small><div><img src="assets/logos/logos-cibc-1-213x120.png" alt="CIBC"><img src="assets/logos/logos-aircanada.png" alt="Air Canada"><img src="assets/logos/US_Air_Force_Logo_Solid_Colour.svg" alt="U.S. Air Force"><img src="assets/logos/logos-vca.png" alt="VCA Animal Hospitals"><img src="assets/logos/logos-sdsu.png" alt="San Diego State University"></div></div>
     </div>
 
     <div class="form-box" id="formCard">
-      <div class="note" aria-hidden="true">only 15 minutes<svg width="44" height="36" viewBox="0 0 44 36" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 5c14 2 26 10 31 26"/><path d="M41 23l-6 8-7-5"/></svg></div>
+      <div class="note" aria-hidden="true">only 15 minutes<svg width="44" height="36" viewBox="0 0 44 36" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 5c14 2 26 10 31 26"/><path d="M41 23l-6 8-7-5"/></svg></div>
       <div class="fb-head"><div><span class="eyebrow">See It in Action</span><h2>Schedule Your Demo</h2></div><span class="dur">About 15 minutes</span></div>
       <form class="demo-form" id="demoForm" novalidate>
         <div class="fgrid">
@@ -647,9 +732,10 @@ footer{background:var(--ink);color:var(--sand);padding:80px 0 0;border-radius:48
           <div class="field full sel"><select id="hq" name="company_hq" required><option value="" disabled selected>Company HQ Location</option><option>North America</option><option>Other</option></select><label for="hq">Company HQ Location<span class="req">*</span></label><span class="msg">Please select an option.</span></div>
           <div class="field full"><textarea id="ms" name="message" placeholder=" "></textarea><label for="ms">How can we help?</label></div>
         </div>
-        <button class="btn btn-primary" type="submit">Submit <span class="arr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+        <p class="form-err" id="formErr" role="alert" hidden></p>
+        <button class="btn btn-primary" type="submit">Submit <span class="arr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
       </form>
-      <div class="success" role="status" aria-live="polite"><div class="ok"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><h3>Thank you<span class="ok-name" id="okName"></span>!</h3><p>A Frontlion specialist will be in touch to schedule your demo.</p></div>
+      <div class="success" role="status" aria-live="polite"><div class="ok"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><h3>Thank you<span class="ok-name" id="okName"></span>!</h3><p>A Frontlion specialist will be in touch to schedule your demo.</p></div>
     </div>
   </div>
 </section>
@@ -658,8 +744,7 @@ footer{background:var(--ink);color:var(--sand);padding:80px 0 0;border-radius:48
 <section class="sec serve" id="serve">
   <div class="wrap">
     <div class="stats">
-      <div class="stat rv"><b>140+</b><small>active customer organizations</small></div>
-      <div class="stat rv d1"><b>Enterprise-grade</b><small>security and compliance</small></div>
+      <div class="stat rv"><b>Enterprise-grade</b><small>security and compliance</small></div>
       <div class="stat rv d2"><b>Rapid</b><small>deployment and scalable configuration</small></div>
       <div class="stat rv d3"><b>Proven</b><small>across complex, multi-location environments</small></div>
     </div>
@@ -670,12 +755,11 @@ footer{background:var(--ink);color:var(--sand);padding:80px 0 0;border-radius:48
         <h2 class="h2 rv d1">Built for organizations where in-person service matters.</h2>
         <p class="lead rv d2" style="margin-top:16px">Frontlion supports banks, healthcare organizations, retailers, government agencies, universities, and transportation operators that need to manage complex service across multiple locations.</p>
       </div>
-      <a href="#" class="btn btn-ghost rv d2">All Industries <span class="arr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
     </div>
   </div>
   <div class="serve-arc">
   <div class="arc-hand l" aria-hidden="true">drag me
-    <svg width="42" height="36" viewBox="0 0 42 36" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 5c14 1 26 9 30 25"/><path d="M26 26l7 6 4-9"/></svg>
+    <svg width="42" height="36" viewBox="0 0 42 36" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 5c14 1 26 9 30 25"/><path d="M26 26l7 6 4-9"/></svg>
   </div>
     <div class="arc-stage" id="arcStage" role="list" aria-label="Industries we serve"></div>
   </div>
@@ -697,23 +781,23 @@ footer{background:var(--ink);color:var(--sand);padding:80px 0 0;border-radius:48
       <p>Every demonstration is built around your locations, service model, and priorities.</p>
       <p>We'll focus on the parts of the platform that matter most to your team, not a generic product tour.</p>
       <div class="mods" aria-label="Platform"><span>Appointments &amp; Check-in</span><span>Queue Management</span><span>Customer Communications</span><span>Visit Intelligence</span><span>Staffing Intelligence</span><span>Frontlion AI</span></div>
-      <a href="#book" class="btn btn-primary">Schedule Now <span class="arr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      <a href="#book" class="btn btn-primary">Schedule Now <span class="arr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
     </div>
 
     <ol class="ex2-list" id="ex2List">
       <li class="ex2-item on">
-        <span class="ex2-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="5" cy="12" r="2.5"/><circle cx="19" cy="5" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="M7.5 12h4l5-6M11.5 12l5 6"/></svg></span>
+        <span class="ex2-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="5" cy="12" r="2.5"/><circle cx="19" cy="5" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="M7.5 12h4l5-6M11.5 12l5 6"/></svg></span>
         <div>
           <span class="no">01</span>
           <h3>Connect the in-person journey</h3>
           <p>Bring appointments, walk-ins, communications, and service workflows together.</p>
           <div class="ex2-viz" aria-hidden="true"><div><div class="ex2-card">
-            <div class="flow2"><span>Appointments</span><span>Walk-ins</span><span>Communications</span><span>Service workflows</span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><b>One in-person journey</b></div>
+            <div class="flow2"><span>Appointments</span><span>Walk-ins</span><span>Communications</span><span>Service workflows</span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><b>One in-person journey</b></div>
           </div></div></div>
         </div>
       </li>
       <li class="ex2-item">
-        <span class="ex2-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>
+        <span class="ex2-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>
         <div>
           <span class="no">02</span>
           <h3>See what is happening across locations</h3>
@@ -725,7 +809,7 @@ footer{background:var(--ink);color:var(--sand);padding:80px 0 0;border-radius:48
         </div>
       </li>
       <li class="ex2-item">
-        <span class="ex2-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4M8 11h6"/></svg></span>
+        <span class="ex2-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4M8 11h6"/></svg></span>
         <div>
           <span class="no">03</span>
           <h3>Find friction in the service flow</h3>
@@ -737,7 +821,7 @@ footer{background:var(--ink);color:var(--sand);padding:80px 0 0;border-radius:48
         </div>
       </li>
       <li class="ex2-item">
-        <span class="ex2-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M17 4.5a3.5 3.5 0 0 1 0 7M21.5 20a6.5 6.5 0 0 0-4-6"/></svg></span>
+        <span class="ex2-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M17 4.5a3.5 3.5 0 0 1 0 7M21.5 20a6.5 6.5 0 0 0-4-6"/></svg></span>
         <div>
           <span class="no">04</span>
           <h3>Give frontline teams more context</h3>
@@ -752,7 +836,7 @@ footer{background:var(--ink);color:var(--sand);padding:80px 0 0;border-radius:48
         </div>
       </li>
       <li class="ex2-item">
-        <span class="ex2-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span>
+        <span class="ex2-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span>
         <div>
           <span class="no">05</span>
           <h3>Turn each visit into operational intelligence</h3>
@@ -760,7 +844,7 @@ footer{background:var(--ink);color:var(--sand);padding:80px 0 0;border-radius:48
           <div class="ex2-viz" aria-hidden="true"><div><div class="ex2-card">
             <div class="sdata">
               <div class="fields"><span>Arrival</span><span>Reason for visit</span><span>Wait</span><span>Service</span><span>Location</span><span>Outcome</span></div>
-              <svg viewBox="0 0 150 90" preserveAspectRatio="none"><path d="M4 76 L34 60 L62 66 L92 38 L120 44 L146 14 V90 H4Z" fill="#C4622D" opacity=".12"/><path d="M4 76 L34 60 L62 66 L92 38 L120 44 L146 14" fill="none" stroke="#C4622D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="146" cy="14" r="5" fill="#C4622D"/></svg>
+              <svg viewBox="0 0 150 90" preserveAspectRatio="none"><path d="M4 76 L34 60 L62 66 L92 38 L120 44 L146 14 V90 H4Z" fill="#D4764A" opacity=".12"/><path d="M4 76 L34 60 L62 66 L92 38 L120 44 L146 14" fill="none" stroke="#D4764A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="146" cy="14" r="5" fill="#D4764A"/></svg>
             </div>
           </div></div></div>
         </div>
@@ -776,15 +860,15 @@ footer{background:var(--ink);color:var(--sand);padding:80px 0 0;border-radius:48
       <span class="eyebrow rv">FAQ</span>
       <h2 class="h2 rv d1">Frequently Asked Questions</h2>
       <div class="card rv d3">
-        <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.8 7L3 21l2-6.2A8 8 0 1 1 21 12z"/></svg></span>
+        <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.8 7L3 21l2-6.2A8 8 0 1 1 21 12z"/></svg></span>
         <div><b>Ask Frontlion</b><a href="#">Chat with our AI assistant →</a></div>
       </div>
     </div>
     <div class="list">
-      <details class="qa rv" open><summary>How long is the Frontlion demo?<span class="tog"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary><p class="ans">Most initial Frontlion demonstrations take about 15 minutes, with additional time available to explore specific workflows, operational challenges, or deployment considerations.</p></details>
-      <details class="qa rv d1"><summary>Is the Frontlion demo tailored to my industry?<span class="tog"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary><p class="ans">Yes. Every Frontlion demo is configured around your environment, priorities, and frontline realities.</p></details>
-      <details class="qa rv d2"><summary>Who should attend a Frontlion demo?<span class="tog"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary><p class="ans">Operations, customer experience, service, branch, location, and transformation leaders are typically the best fit to attend a Frontlion demo. Technical teams can join when deeper integration or deployment questions come up.</p></details>
-      <details class="qa rv d3"><summary>What happens after the Frontlion demo?<span class="tog"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary><p class="ans">After the Frontlion demo concludes, we’ll recommend the most practical next step, which may include a pilot or deployment path. If there isn’t a fit – we’ll tell you.</p></details>
+      <details class="qa rv" open><summary>How long is the Frontlion demo?<span class="tog"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary><p class="ans">Most initial Frontlion demonstrations take about 15 minutes, with additional time available to explore specific workflows, operational challenges, or deployment considerations.</p></details>
+      <details class="qa rv d1"><summary>Is the Frontlion demo tailored to my industry?<span class="tog"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary><p class="ans">Yes. Every Frontlion demo is configured around your environment, priorities, and frontline realities.</p></details>
+      <details class="qa rv d2"><summary>Who should attend a Frontlion demo?<span class="tog"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary><p class="ans">Operations, customer experience, service, branch, location, and transformation leaders are typically the best fit to attend a Frontlion demo. Technical teams can join when deeper integration or deployment questions come up.</p></details>
+      <details class="qa rv d3"><summary>What happens after the Frontlion demo?<span class="tog"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary><p class="ans">After the Frontlion demo concludes, we’ll recommend the most practical next step, which may include a pilot or deployment path. If there isn’t a fit – we’ll tell you.</p></details>
     </div>
   </div>
 </section>
@@ -796,20 +880,20 @@ footer{background:var(--ink);color:var(--sand);padding:80px 0 0;border-radius:48
       <div class="bn">
         <span class="obj o-bub" aria-hidden="true"><i><b></b><b></b><b></b></i></span>
         <span class="obj o-tk" aria-hidden="true"><span>A-104</span><small>NOW SERVING</small><em></em></span>
-        <span class="ib i1" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span>
-        <span class="ib i2" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>
-        <span class="ib i3" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.8 7L3 21l2-6.2A8 8 0 1 1 21 12z"/></svg></span>
-        <span class="ib i4" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span>
+        <span class="ib i1" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span>
+        <span class="ib i2" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>
+        <span class="ib i3" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.8 7L3 21l2-6.2A8 8 0 1 1 21 12z"/></svg></span>
+        <span class="ib i4" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span>
 
         <div class="bn-in">
-          <span class="bn-tag"><b><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.8 7L3 21l2-6.2A8 8 0 1 1 21 12z"/></svg></b>Talk to Us Direct</span>
+          <span class="bn-tag"><b><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.8 7L3 21l2-6.2A8 8 0 1 1 21 12z"/></svg></b>Talk to Us Direct</span>
           <h2 id="finalTitle">Prefer a Direct<br>Conversation?</h2>
           <p>Talk with a Frontlion specialist about your locations, service model, and goals, and we&rsquo;ll connect you with the right person.</p>
           <div class="bn-btns">
-            <a href="#" class="btn btn-dark">Contact Us <span class="arr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
-            <a href="#book" class="btn btn-ghost bn-ghost">Schedule Now <span class="arr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+            <a href="https://frontlion.com/contact/" class="btn btn-dark">Contact Us <span class="arr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+            <a href="#book" class="btn btn-ghost bn-ghost">Schedule Now <span class="arr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
           </div>
-          <div class="bn-proof"><span class="avs" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span><b>140+</b> active customer organizations</span></div>
+          <div class="bn-proof"><span class="avs" aria-hidden="true"><i title="Banking"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 22h18M6 18v-7M10 18v-7M14 18v-7M18 18v-7M12 2l8 5H4z"/></svg></i><i title="Healthcare"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/></svg></i><i title="Government"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22V4a1 1 0 0 1 .4-.8A6 6 0 0 1 8 2c3 0 5 2 7.33 2q2 0 3.07-.8A1 1 0 0 1 20 4v10a1 1 0 0 1-.4.8A6 6 0 0 1 16 16c-3 0-5-2-8-2a6 6 0 0 0-4 1.5"/></svg></i><i title="And more"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5v14"/></svg></i></span><span>Trusted by <b>banking, healthcare, government</b> and more</span></div>
         </div>
       </div>
     </div>
@@ -822,18 +906,28 @@ footer{background:var(--ink);color:var(--sand);padding:80px 0 0;border-radius:48
   <div class="wrap">
     <div class="f-top">
       <div class="brand"><img src="assets/frontlion-logo-1.svg" alt="Frontlion" width="174" height="33"><p>The In-Person Service Intelligence Platform.</p></div>
-      <div><h4>Platform</h4><ul><li><a href="#">Platform</a></li><li><a href="#">Frontlion AI</a></li><li><a href="#">Integrations</a></li><li><a href="#">Service Maturity Assessment</a></li><li><a href="#">Service Value Assessment</a></li><li><a href="#">Pricing</a></li></ul></div>
-      <div><h4>Resources</h4><ul><li><a href="#">Blog</a></li><li><a href="#">Case Studies</a></li><li><a href="#">Guides</a></li><li><a href="#">Frontlion Versus</a></li></ul></div>
-      <div><h4>Company</h4><ul><li><a href="#">Customer Support</a></li><li><a href="#">Partner with Frontlion</a></li><li><a href="#">Qtrac India</a></li><li><a href="#">Brand Transition Notice</a></li><li><a href="#book">Request a Demo</a></li><li><a href="#">Contact Us</a></li></ul></div>
+      <div><h4>Platform</h4><ul><li><a href="https://frontlion.com/platform/">Platform</a></li><li><a href="https://frontlion.com/platform/frontlion-ai/">Frontlion AI</a></li><li><a href="https://frontlion.com/platform/integrations/">Integrations</a></li><li><a href="https://frontlion.com/service-maturity-assessment/">Service Maturity Assessment</a></li><li><a href="https://frontlion.com/service-value-assessment/">Service Value Assessment</a></li><li><a href="https://frontlion.com/pricing/">Pricing</a></li></ul></div>
+      <div><h4>Resources</h4><ul><li><a href="https://frontlion.com/resource-type/blog/">Blog</a></li><li><a href="https://frontlion.com/resource-type/case-studies/">Case Studies</a></li><li><a href="https://frontlion.com/resource-type/guides/">Guides</a></li><li><a href="https://frontlion.com/resource-type/comparisons/">Frontlion Versus</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="https://frontlion.com/company/customer-support/">Customer Support</a></li><li><a href="https://frontlion.com/partners/">Partner with Frontlion</a></li><li><a href="https://frontlion.com/qtrac-india/">Qtrac India</a></li><li><a href="#" data-notice>Brand Transition Notice</a></li><li><a href="#book">Request a Demo</a></li><li><a href="https://frontlion.com/contact/">Contact Us</a></li></ul></div>
     </div>
     <p class="f-notice"><b>Brand Transition Notice:</b> Some testimonials, case studies and metrics were created under the Qtrac brand. Frontlion is a brand of Qtrac, Inc.</p>
     <div class="f-bot">
       <span>© 2026 Frontlion. All rights reserved.</span>
-      <nav><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Cookie Policy</a></nav>
+      <nav><a href="https://frontlion.com/privacy-policy">Privacy Policy</a><a href="https://frontlion.com/terms-of-service">Terms of Service</a><a href="https://frontlion.com/cookie-policy">Cookie Policy</a></nav>
     </div>
     <div class="f-word" aria-hidden="true">frontlion</div>
   </div>
 </footer>
+
+<!-- Live HubSpot form (frontlion.com/demo/): filled from #demoForm on submit, kept off-screen -->
+<div id="hsForm" class="hs-offscreen" aria-hidden="true"></div>
+
+<!-- Brand Transition Notice (matches frontlion.com) -->
+<dialog class="btn-notice" id="brandNotice" aria-labelledby="bnTitle">
+  <button class="bt-x" type="button" aria-label="Close" data-close><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  <h2 id="bnTitle">Brand Transition Notice</h2>
+  <p>Certain customer testimonials, case studies, metrics, and other historical content on this website were originally created or provided when the company operated under the Qtrac brand. In some instances, brand references and minor editorial elements have been updated to reflect the Frontlion brand. Unless otherwise indicated, these updates do not materially change the substance or intent of the original content. Frontlion is a brand of Qtrac, Inc.</p>
+</dialog>
 
 <script>
 // Customer logos (two marquee rows, duplicated for seamless loop)
@@ -848,7 +942,7 @@ fill(document.getElementById('row2'),logos.slice(10));
 
 // Curved industry carousel: cards ride an arc, auto-drift, pause on hover, draggable
 (()=>{
-  const ic=p=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
+  const ic=p=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
   const I={
     bank:ic('<path d="M3 10l9-6 9 6M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 21h18"/>'),
     health:ic('<path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/>'),
@@ -876,10 +970,11 @@ fill(document.getElementById('row2'),logos.slice(10));
     ["k-dark","edu","Education","Universities",ui.serve("E-118","Admissions","Up next · Desk 4"),"campus"],
     ["k-gray","air","Transportation","Transportation operators",ui.serve("T-019","Cargo desk","Now serving · Desk 1"),"port2"]
   ];
-  const stage=document.getElementById('arcStage');
+const IND={Banking:'banking',Healthcare:'healthcare',Retail:'retail','Public Sector':'public-sector',Education:'education',Transportation:'transportation'};
+    const stage=document.getElementById('arcStage');
   const els=cards.map(([k,i,name,kind,u,ph])=>{
-    const a=document.createElement('a');a.href='#serve';a.className='acard '+k;a.setAttribute('role','listitem');a.draggable=false;
-    a.innerHTML=`<span class="ph" style="background-image:url(assets/photos/${ph}.jpg)"></span><span class="deco"></span><div class="top"><span class="ic">${I[i]}</span><span class="lab">${name}</span></div><h3>${name}<em>${kind}</em></h3>${u}`;
+    const a=document.createElement('a');a.href=`https://frontlion.com/industry/${IND[name]}/`;a.className='acard '+k;a.setAttribute('role','listitem');a.draggable=false;
+    a.innerHTML=`<span class="ph" style="background-image:url(assets/photos/${ph}.jpg)"></span><div class="top"><span class="ic">${I[i]}</span><span class="lab">${name}</span></div><h3>${name}<em>${kind}</em></h3>${u}`;
     stage.appendChild(a);return a;
   });
   const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -894,21 +989,58 @@ fill(document.getElementById('row2'),logos.slice(10));
       el.style.zIndex=100-Math.round(Math.abs(n)*50);
     });
   };
-  const loop=()=>{if(vis&&!drag){vel+=(target-vel)*.06;off+=vel}layout();requestAnimationFrame(loop)};
+  // free spin: a flick keeps the arc rotating, then friction eases it back to the idle drift
+  const loop=()=>{if(vis&&!drag){vel+=(target-vel)*.035;off+=vel}layout();requestAnimationFrame(loop)};
   new IntersectionObserver(e=>vis=e[0].isIntersecting).observe(stage);
   stage.addEventListener('mouseenter',()=>target=0);
   stage.addEventListener('mouseleave',()=>target=still?0:.45);
-  stage.addEventListener('pointerdown',e=>{drag={x:e.clientX,o:off};moved=0;stage.setPointerCapture(e.pointerId);stage.classList.add('drag')});
-  stage.addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-drag.x;moved=Math.max(moved,Math.abs(dx));off=drag.o-dx});
-  const end=()=>{drag=null;stage.classList.remove('drag')};
+  stage.addEventListener('pointerdown',e=>{drag={x:e.clientX,o:off,lx:e.clientX,lt:performance.now(),v:0};moved=0;stage.setPointerCapture(e.pointerId);stage.classList.add('drag')});
+  stage.addEventListener('pointermove',e=>{
+    if(!drag)return;const dx=e.clientX-drag.x,now=performance.now(),dt=Math.max(1,now-drag.lt);
+    drag.v=drag.v*.6+(-(e.clientX-drag.lx)/dt*16.7)*.4;drag.lx=e.clientX;drag.lt=now;
+    moved=Math.max(moved,Math.abs(dx));off=drag.o-dx});
+  const end=()=>{if(drag){const idle=performance.now()-drag.lt>90;vel=idle?0:Math.max(-60,Math.min(60,drag.v))}drag=null;stage.classList.remove('drag')};
   stage.addEventListener('pointerup',end);stage.addEventListener('pointercancel',end);
   stage.addEventListener('click',e=>{if(moved>6){e.preventDefault();e.stopPropagation()}},true);
   layout();requestAnimationFrame(loop);
 })();
+// Brand Transition Notice dialog: opens from the footer link, closes on X, Esc, or backdrop click
+const notice=document.getElementById('brandNotice');
+document.querySelectorAll('[data-notice]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();notice.showModal()}));
+notice.querySelector('[data-close]').addEventListener('click',()=>notice.close());
+notice.addEventListener('click',e=>{const r=notice.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)notice.close()});
+
+// Mobile menu: built from the desktop mega menus so both always list the same links
+(()=>{
+  const chev='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';
+  const groups=[...document.querySelectorAll('.menu > li')].map(li=>{
+    const label=li.querySelector(':scope > a').firstChild.textContent.trim();
+    const items=[...li.querySelectorAll('.mg-col-h b, .mega a')].map(el=>{
+      if(el.tagName==='B')return `<span class="mm-h">${el.textContent}</span>`;
+      const more=el.matches('.ln, .cta');
+      return `<a href="${el.getAttribute('href')}"${more?' class="more"':''}>${(el.querySelector('b')||el).textContent.trim()}</a>`;
+    }).join('');
+    return `<details class="mm-g"><summary>${label}${chev}</summary><div class="mm-l">${items}</div></details>`;
+  }).join('');
+  const util=[...document.querySelectorAll('.announce nav a')].map(a=>`<a href="${a.getAttribute('href')}" class="${a.className}">${a.innerHTML}</a>`).join('');
+  document.getElementById('mm').innerHTML=`${groups}<div class="mm-u">${util}</div><a href="#book" class="mm-cta">Request a Demo</a>`;
+})();
+
 // Mobile menu
 const burger=document.querySelector('.burger'),mm=document.getElementById('mm');
 burger.addEventListener('click',()=>{const o=mm.classList.toggle('open');burger.setAttribute('aria-expanded',o)});
 mm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mm.classList.remove('open');burger.setAttribute('aria-expanded',false)}));
+// "Schedule Now" / "Request a Demo": scroll to the form and put the cursor in the first field
+document.querySelectorAll('a[href="#book"]').forEach(a=>a.addEventListener('click',e=>{
+  e.preventDefault();
+  const card=document.getElementById('formCard'),hdH=document.querySelector('header.site').offsetHeight;
+  scrollTo({top:card.getBoundingClientRect().top+scrollY-hdH-20,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+  const first=document.getElementById('fn');
+  if(first.offsetParent)first.focus({preventScroll:true});
+}));
+// Header shadow once the page scrolls
+const hd=document.querySelector('header.site');
+addEventListener('scroll',()=>hd.classList.toggle('scrolled',scrollY>8),{passive:true});
 
 // Explore list: the item in the middle of the screen is highlighted and opens its visual
 (()=>{
@@ -924,21 +1056,68 @@ mm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mm.classList
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 
-// Demo form (front-end validation; wire to your CRM endpoint)
-const form=document.getElementById('demoForm');
-form.addEventListener('submit',e=>{
+// Demo form: our UI, submitted through the live HubSpot form used on frontlion.com/demo/,
+// loaded off-screen so reCAPTCHA, owner notifications and attribution behave exactly as on the site
+const HS={region:'na1',portalId:'7098847',formId:'1670c1c6-e3aa-4404-b209-a7b650bf037d'};
+const form=document.getElementById('demoForm'),submitBtn=form.querySelector('[type=submit]'),formErr=document.getElementById('formErr');
+form.querySelectorAll('.msg').forEach(m=>m.dataset.def=m.textContent);
+let hsForm=null,pending=null;
+const hsReady=new Promise((res,rej)=>{
+  const s=document.createElement('script');
+  s.src='https://js.hsforms.net/forms/embed/v2.js';s.async=true;s.onerror=rej;
+  s.onload=()=>hbspt.forms.create({...HS,target:'#hsForm',
+    onFormReady:f=>{hsForm=(f&&f.jquery?f[0]:f)||document.querySelector('#hsForm form');res()},
+    onFormSubmitted:()=>pending&&pending.ok()});
+  document.head.appendChild(s);
+  setTimeout(()=>rej(new Error('HubSpot form did not load')),15000);
+});
+hsReady.catch(()=>{});
+const setBusy=b=>{submitBtn.disabled=b;submitBtn.firstChild.textContent=b?'Sending… ':'Submit '};
+const showFormErr=msg=>{setBusy(false);pending=null;formErr.textContent=msg;formErr.hidden=false};
+// surface HubSpot's own validation (e.g. blocked email domains) under the matching field
+const hsErrors=()=>[...hsForm.querySelectorAll('.hs-error-msgs')].filter(e=>e.textContent.trim()).map(e=>{
+  const name=[...(e.closest('.hs-form-field')?.classList||[])].find(c=>c.startsWith('hs_'))?.slice(3);
+  return {name,msg:e.textContent.trim()};
+});
+form.addEventListener('submit',async e=>{
   e.preventDefault();
+  if(pending)return;
   let ok=true,first=null;
   form.querySelectorAll('[required]').forEach(inp=>{
     const f=inp.closest('.field');
     const v=inp.value.trim(),valid=inp.type==='email'?/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v):inp.type==='tel'?/^\+?[\d\s().-]{7,}$/.test(v):v!=='';
+    f.querySelector('.msg').textContent=f.querySelector('.msg').dataset.def;
     f.classList.toggle('err',!valid);
     if(!valid){ok=false;first=first||inp}
   });
   if(!ok){first.focus();return}
-  const n=form.firstname.value.trim();
-  document.getElementById('okName').textContent=n?', '+n:'';
-  document.getElementById('formCard').classList.add('done');
+  formErr.hidden=true;setBusy(true);
+  try{await hsReady}catch{return showFormErr('We couldn’t reach our scheduling system. Please try again in a moment.')}
+  new FormData(form).forEach((v,k)=>{
+    const el=hsForm.querySelector(`[name="${k}"]`);if(!el)return;
+    el.value=v;el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}));
+  });
+  const watch=new MutationObserver(()=>{
+    const errs=hsErrors();if(!errs.length)return;
+    watch.disconnect();clearTimeout(pending&&pending.timer);
+    let firstBad=null;
+    errs.forEach(({name,msg})=>{
+      const inp=name&&form.querySelector(`[name="${name}"]`);
+      if(!inp){formErr.textContent=msg;formErr.hidden=false;return}
+      const f=inp.closest('.field');f.querySelector('.msg').textContent=msg;f.classList.add('err');firstBad=firstBad||inp;
+    });
+    setBusy(false);pending=null;firstBad&&firstBad.focus();
+  });
+  pending={
+    ok(){watch.disconnect();clearTimeout(this.timer);pending=null;
+      const n=form.firstname.value.trim();
+      document.getElementById('okName').textContent=n?', '+n:'';
+      document.getElementById('formCard').classList.add('done')},
+    // generous: a reCAPTCHA challenge may need the visitor's input
+    timer:setTimeout(()=>{watch.disconnect();showFormErr('Your request is taking longer than expected. Please try again.')},90000)
+  };
+  watch.observe(hsForm,{subtree:true,childList:true,characterData:true});
+  hsForm.querySelector('[type=submit]').click();
 });
 form.querySelectorAll('input,select').forEach(i=>i.addEventListener('input',()=>i.closest('.field')?.classList.remove('err')));
 </script>
