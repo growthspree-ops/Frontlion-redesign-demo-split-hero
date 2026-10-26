@@ -22,7 +22,7 @@
 
   /* background system */
   --bg:#FDFAF7;          /* --bg-primary */
-  --cream:#0e0c0a;       /* --bg-secondary */
+  --cream:#F7F3EE;       /* --bg-secondary */
   --cream-2:var(--peach);
   --bg-warm:#FDF5EF;
   --orange-soft:color-mix(in srgb, var(--coral) 22%, #fff);
@@ -355,9 +355,9 @@ section{position:relative}
 .logo-track{display:flex;gap:18px;width:max-content;animation:marquee 50s linear infinite}
 .logo-row.rev .logo-track{animation-direction:reverse}
 .logo-row:hover .logo-track{animation-play-state:paused}
-.lg{width:180px;height:92px;border-radius:var(--r-sm);background:var(--cream);display:grid;place-items:center;padding:18px 26px;flex:none}
-.lg img{max-height:54px;width:auto;object-fit:contain;filter:grayscale(1);opacity:.75;transition:filter .3s, opacity .3s}
-.lg:hover img{filter:none;opacity:1}
+.logos .fl-lg{width:180px;height:92px;border-radius:var(--r-sm);background:var(--cream);color-scheme:light;display:grid;place-items:center;padding:18px 26px;flex:none}
+.logos .fl-lg img{max-height:54px;width:auto;object-fit:contain;filter:grayscale(1);opacity:.75;transition:filter .3s, opacity .3s}
+.logos .fl-lg:hover img{filter:none;opacity:1}
 
 /* ============ Book section (demo ticket) ============ */
 .book{padding:110px 0}
@@ -935,7 +935,7 @@ const logos=[
  ["logos-colaph-300x118.png","County of Los Angeles Public Health"],["CWC-Liberty-Caribbean-300x93.png","Liberty Caribbean"],["US_Air_Force_Logo_Solid_Colour.svg","U.S. Air Force"],["logos-cibc-1-213x120.png","CIBC"],["logos-josabank.png","Jos. A. Bank"],["logos-vca.png","VCA Animal Hospitals"],["US-Dept-VA-Logo-B-238x120.png","U.S. Department of Veterans Affairs"],["us-army-300x100.png","U.S. Army"],["logos-orangeco-120x120.png","County of Orange, California"],["logos-atl-263x120.png","Hartsfield-Jackson Atlanta International Airport"],
  ["logos-aircanada.png","Air Canada"],["logos-sdsu.png","San Diego State University"],["logos-vmbuilding-300x73.png","VM Building Society"],["logos-liberty-99x120.png","Liberty Latin America"],["logos-carrier-enterprises-120x120.png","Carrier Enterprise"],["logos-vfsglobal.png","VFS Global"],["logos-gadph-195x120.png","Georgia Department of Public Health"],["logos-panj-233x120.png","Port Authority of New York and New Jersey"],["logos-mwaa-153x120.png","Metropolitan Washington Airports Authority"],["logos-ncbju-300x68.png","NCB National Commercial Bank"]
 ];
-const tile=([f,a],hidden)=>`<div class="lg"${hidden?' aria-hidden="true"':''}><img src="assets/logos/${f}" alt="${hidden?'':a}" loading="lazy"></div>`;
+const tile=([f,a],hidden)=>`<div class="fl-lg"${hidden?' aria-hidden="true"':''}><img src="assets/logos/${f}" alt="${hidden?'':a}" loading="lazy"></div>`;
 const fill=(el,list)=>{el.innerHTML=list.map(l=>tile(l)).join('')+list.map(l=>tile(l,true)).join('')};
 fill(document.getElementById('row1'),logos.slice(0,10));
 fill(document.getElementById('row2'),logos.slice(10));
